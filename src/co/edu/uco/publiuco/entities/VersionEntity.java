@@ -1,21 +1,37 @@
 package co.edu.uco.publiuco.entities;
 
-import co.edu.uco.publiuco.crosscutting.utils.UtilText;
+import co.edu.uco.publiuco.crosscutting.utils.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class VersionEntity {
+public final class VersionEntity {
     private UUID identificador;
     private PublicacionEntity publicacion;
     private VersionEntity versionAnterior;
-    private int numeroVersion;
+    private Integer numeroVersion;
     private LocalDateTime fechaCreacion;
     private LocalDateTime ultimaFechaModificacion;
     private String titulo;
     private String resumen;
     private String cuerpo;
     private EstadoEntity estado;
+
+    public static VersionEntity DEFAULT_OBJECT = new VersionEntity();
+
+
+    private VersionEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setPublicacion(PublicacionEntity.getDefaultObject());
+        setVersionAnterior(getDefaultObject());
+        setNumeroVersion(UtilNumber.getIntegerDefaultValue());
+        setFechaCreacion(UtilDate.getDefaultValue());
+        setUltimaFechaModificacion(UtilDate.getDefaultValue());
+        setTitulo(UtilText.getDefaultValue());
+        setResumen(UtilText.getDefaultValue());
+        setCuerpo(UtilText.getDefaultValue());
+        setEstado(EstadoEntity.getDefaultObject());
+    }
 
     public VersionEntity(UUID identificador, PublicacionEntity publicacion, VersionEntity versionAnterior, int numeroVersion, LocalDateTime fechaCreacion, LocalDateTime ultimaFechaModificacion, String titulo, String resumen, String cuerpo, EstadoEntity estado) {
         setIdentificador(identificador);
@@ -30,6 +46,7 @@ public class VersionEntity {
         setEstado(estado);
     }
 
+
     public UUID getIdentificador() {
         return identificador;
     }
@@ -42,7 +59,7 @@ public class VersionEntity {
         return versionAnterior;
     }
 
-    public int getNumeroVersion() {
+    public Integer getNumeroVersion() {
         return numeroVersion;
     }
 
@@ -70,43 +87,46 @@ public class VersionEntity {
         return estado;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setPublicacion(PublicacionEntity publicacion) {
-        this.publicacion = publicacion;
+    private void setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
     }
 
     private void setVersionAnterior(VersionEntity versionAnterior) {
-        this.versionAnterior = versionAnterior;
+        this.versionAnterior = UtilObject.getDefault(versionAnterior, VersionEntity.getDefaultObject());
     }
 
-    private void setNumeroVersion(int numeroVersion) {
-        this.numeroVersion = numeroVersion;
+    private void setNumeroVersion(final Integer numeroVersion) {
+        this.numeroVersion = UtilNumber.getDefaultInt(numeroVersion);
     }
 
-    private void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    private void setFechaCreacion(final LocalDateTime fechaCreacion) {
+        this.fechaCreacion = UtilDate.getDefault(fechaCreacion);
     }
 
-    private void setUltimaFechaModificacion(LocalDateTime ultimaFechaModificacion) {
-        this.ultimaFechaModificacion = ultimaFechaModificacion;
+    private void setUltimaFechaModificacion(final LocalDateTime ultimaFechaModificacion) {
+        this.ultimaFechaModificacion = UtilDate.getDefault(ultimaFechaModificacion);
     }
 
-    private void setTitulo(String titulo) {
+    private void setTitulo(final String titulo) {
         this.titulo = UtilText.applyTrim(titulo);
     }
 
-    private void setResumen(String resumen) {
+    private void setResumen(final String resumen) {
         this.resumen = UtilText.applyTrim(resumen);
     }
 
-    private void setCuerpo(String cuerpo) {
+    private void setCuerpo(final String cuerpo) {
         this.cuerpo = UtilText.applyTrim(cuerpo);
     }
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = estado;
+    private void setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    }
+    public static VersionEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

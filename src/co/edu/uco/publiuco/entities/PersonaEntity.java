@@ -1,11 +1,12 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
-import co.edu.uco.publiuco.dto.TipoIdentificacionEntity;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.util.UUID;
 
-public class PersonaEntity {
+public final class PersonaEntity {
     private UUID identificador;
     private TipoIdentificacionEntity tipoIdentificacionDTO;
     private String numeroIdentificacion;
@@ -18,13 +19,27 @@ public class PersonaEntity {
     private String numeroTelefonoMovil;
     private EstadoEntity estado;
     private TipoRelacionInstitucionEntity tipoRelacionInstitucion;
+    public static PersonaEntity DEFAULT_OBJECT = new PersonaEntity();
 
+    private PersonaEntity() {
+        super();
+        setIdentificador(UtilUUID.getDefaultValue());
+        setTipoIdentificacionDTO(TipoIdentificacionEntity.getDefaultObject());
+        setNumeroIdentificacion(UtilText.getDefaultValue());
+        setPrimerNombre(UtilText.getDefaultValue());
+        setSegundoNombre(UtilText.getDefaultValue());
+        setPrimerApellido(UtilText.getDefaultValue());
+        setSegundoApellido(UtilText.getDefaultValue());
+        setCorreoElectronico(UtilText.getDefaultValue());
+        setIndicadorPais(PaisEntity.getDefaultObject());
+        setNumeroTelefonoMovil(UtilText.getDefaultValue());
+        setEstado(EstadoEntity.getDefaultObject());
+    }
 
-
-    public PersonaEntity(UUID identificador, TipoIdentificacionEntity tipoIdentificacion, String numeroIdentificacion, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correoElectronico, PaisEntity indicadorPais, String numeroTelefonoMovil, EstadoEntity estado, TipoRelacionInstitucionEntity tipoRelacionInstitucion) {
+    public PersonaEntity(UUID identificador, TipoIdentificacionEntity tipoIdentificacionDTO, String numeroIdentificacion, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correoElectronico, PaisEntity indicadorPais, String numeroTelefonoMovil, EstadoEntity estado, TipoRelacionInstitucionEntity tipoRelacionInstitucion) {
         super();
         setIdentificador(identificador);
-        setTipoIdentificacionDTO(tipoIdentificacion);
+        setTipoIdentificacionDTO(tipoIdentificacionDTO);
         setNumeroIdentificacion(numeroIdentificacion);
         setPrimerNombre(primerNombre);
         setSegundoNombre(segundoNombre);
@@ -85,51 +100,54 @@ public class PersonaEntity {
         return tipoRelacionInstitucion;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setTipoIdentificacionDTO(TipoIdentificacionEntity tipoIdentificacionDTO) {
-        this.tipoIdentificacionDTO = tipoIdentificacionDTO;
+    private void setTipoIdentificacionDTO(final TipoIdentificacionEntity tipoIdentificacionDTO) {
+        this.tipoIdentificacionDTO = UtilObject.getDefault(tipoIdentificacionDTO, TipoIdentificacionEntity.getDefaultObject());
     }
 
-    private void setNumeroIdentificacion(String numeroIdentificacion) {
+    private void setNumeroIdentificacion(final String numeroIdentificacion) {
         this.numeroIdentificacion = UtilText.applyTrim(numeroIdentificacion);
     }
 
-    private void setPrimerNombre(String primerNombre) {
+    private void setPrimerNombre(final String primerNombre) {
         this.primerNombre = UtilText.applyTrim(primerNombre);
     }
 
-    private void setSegundoNombre(String segundoNombre) {
+    private void setSegundoNombre(final String segundoNombre) {
         this.segundoNombre = UtilText.applyTrim(segundoNombre);
     }
 
-    private void setPrimerApellido(String primerApellido) {
+    private void setPrimerApellido(final String primerApellido) {
         this.primerApellido = UtilText.applyTrim(primerApellido);
     }
 
-    private void setSegundoApellido(String segundoApellido) {
+    private void setSegundoApellido(final String segundoApellido) {
         this.segundoApellido = UtilText.applyTrim(segundoApellido);
     }
 
-    private void setCorreoElectronico(String correoElectronico) {
+    private void setCorreoElectronico(final String correoElectronico) {
         this.correoElectronico = UtilText.applyTrim(correoElectronico);
     }
 
-    private void setIndicadorPais(PaisEntity indicadorPais) {
-        this.indicadorPais = indicadorPais;
+    private void setIndicadorPais(final PaisEntity indicadorPais) {
+        this.indicadorPais = UtilObject.getDefault(indicadorPais, PaisEntity.getDefaultObject());
     }
 
-    private void setNumeroTelefonoMovil(String numeroTelefonoMovil) {
+    private void setNumeroTelefonoMovil(final String numeroTelefonoMovil) {
         this.numeroTelefonoMovil = UtilText.applyTrim(numeroTelefonoMovil);
     }
 
     private void setEstado(EstadoEntity estado) {
-        this.estado = estado;
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
     }
 
     private void setTipoRelacionInstitucion(TipoRelacionInstitucionEntity tipoRelacionInstitucion) {
-        this.tipoRelacionInstitucion = tipoRelacionInstitucion;
+        this.tipoRelacionInstitucion = UtilObject.getDefault(tipoRelacionInstitucion, TipoRelacionInstitucionEntity.getDefaultObject());
+    }
+    public static PersonaEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

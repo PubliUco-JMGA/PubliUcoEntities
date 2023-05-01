@@ -1,16 +1,29 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilDate;
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class PublicacionEntity {
+public final class PublicacionEntity {
     private UUID identificador;
     private CategoriaEntity categoria;
     private TipoAccesoEntity tipoAcceso;
     private LocalDateTime fechaPublicacion;
     private VersionEntity versionPublicada;
     private EstadoEntity estado;
+    public static PublicacionEntity DEFAULT_OBJECT = new PublicacionEntity();
 
+    private PublicacionEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setCategoria(CategoriaEntity.getDefaultObject());
+        setTipoAcceso(TipoAccesoEntity.getDefaultObject());
+        setFechaPublicacion(UtilDate.getDefaultValue());
+        setVersionPublicada(VersionEntity.getDefaultObject());
+        setEstado(EstadoEntity.getDefaultObject());
+    }
 
     public PublicacionEntity(UUID identificador, CategoriaEntity categoria, TipoAccesoEntity tipoAcceso, LocalDateTime fechaPublicacion, VersionEntity versionPublicada, EstadoEntity estado) {
         setIdentificador(identificador);
@@ -45,27 +58,30 @@ public class PublicacionEntity {
         return estado;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setCategoria(CategoriaEntity categoria) {
-        this.categoria = categoria;
+    private void setCategoria(final CategoriaEntity categoria) {
+        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.getDefaultObject());
     }
 
-    private void setTipoAcceso(TipoAccesoEntity tipoAcceso) {
-        this.tipoAcceso = tipoAcceso;
+    private void setTipoAcceso(final TipoAccesoEntity tipoAcceso) {
+        this.tipoAcceso = UtilObject.getDefault(tipoAcceso, TipoAccesoEntity.getDefaultObject());
     }
 
-    private void setFechaPublicacion(LocalDateTime fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
+    private void setFechaPublicacion(final LocalDateTime fechaPublicacion) {
+        this.fechaPublicacion = UtilDate.getDefault(fechaPublicacion);
     }
 
-    private void setVersionPublicada(VersionEntity versionPublicada) {
-        this.versionPublicada = versionPublicada;
+    private void setVersionPublicada(final VersionEntity versionPublicada) {
+        this.versionPublicada = UtilObject.getDefault(versionPublicada, VersionEntity.getDefaultObject());
     }
 
     private void setEstado(EstadoEntity estado) {
-        this.estado = estado;
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    }
+    public static PublicacionEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

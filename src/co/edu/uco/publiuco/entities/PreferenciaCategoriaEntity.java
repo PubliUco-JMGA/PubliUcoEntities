@@ -1,13 +1,22 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
+
 import java.util.UUID;
 
-public class PreferenciaCategoriaEntity {
+public final class PreferenciaCategoriaEntity {
     private UUID identificador;
     private PerfilEntity perfil;
     private CategoriaEntity categoria;
+    public static PreferenciaCategoriaEntity DEFAULT_OBJECT = new PreferenciaCategoriaEntity();
 
-
+    private PreferenciaCategoriaEntity() {
+        super();
+        setIdentificador(UtilUUID.getDefaultValue());
+        setPerfil(PerfilEntity.getDefaultObject());
+        setCategoria(CategoriaEntity.getDefaultObject());
+    }
 
     public PreferenciaCategoriaEntity(UUID identificador, PerfilEntity perfil, CategoriaEntity categoria) {
      super();
@@ -28,15 +37,18 @@ public class PreferenciaCategoriaEntity {
         return categoria;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setPerfil(PerfilEntity perfil) {
-        this.perfil = perfil;
+    private void setPerfil(final PerfilEntity perfil) {
+        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.getDefaultObject());
     }
 
-    private void setCategoria(CategoriaEntity categoria) {
-        this.categoria = categoria;
+    private void setCategoria(final CategoriaEntity categoria) {
+        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.getDefaultObject());
+    }
+    public static PreferenciaCategoriaEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

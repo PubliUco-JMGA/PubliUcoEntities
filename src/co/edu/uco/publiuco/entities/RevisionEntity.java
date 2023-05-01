@@ -1,9 +1,13 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilDate;
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class RevisionEntity {
+public final class RevisionEntity {
     private UUID identificador;
     private VersionEntity version;
     private TipoRevisionEntity tipoRevision;
@@ -11,7 +15,17 @@ public class RevisionEntity {
     private LocalDateTime fechaLimiteRevision;
     private LocalDateTime fechaCompletitudRevision;
     private EstadoEntity estado;
+    public static RevisionEntity DEFAULT_OBJECT = new RevisionEntity();
 
+    private RevisionEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setVersion(VersionEntity.getDefaultObject());
+        setTipoRevision(TipoRevisionEntity.getDefaultObject());
+        setFechaSolicitudRevision(UtilDate.getDefaultValue());
+        setFechaLimiteRevision(UtilDate.getDefaultValue());
+        setFechaCompletitudRevision(UtilDate.getDefaultValue());
+        setEstado(EstadoEntity.getDefaultObject());
+    }
     public RevisionEntity(UUID identificador, VersionEntity version, TipoRevisionEntity tipoRevision, LocalDateTime fechaSolicitudRevision, LocalDateTime fechaLimiteRevision, LocalDateTime fechaCompletitudRevision, EstadoEntity estado) {
         setIdentificador(identificador);
         setVersion(version);
@@ -50,31 +64,34 @@ public class RevisionEntity {
         return estado;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setVersion(VersionEntity version) {
-        this.version = version;
+    private void setVersion(final VersionEntity version) {
+        this.version = UtilObject.getDefault(version, VersionEntity.getDefaultObject());
     }
 
-    private void setTipoRevision(TipoRevisionEntity tipoRevision) {
-        this.tipoRevision = tipoRevision;
+    private void setTipoRevision(final TipoRevisionEntity tipoRevision) {
+        this.tipoRevision = UtilObject.getDefault(tipoRevision, TipoRevisionEntity.getDefaultObject());
     }
 
-    private void setFechaSolicitudRevision(LocalDateTime fechaSolicitudRevision) {
-        this.fechaSolicitudRevision = fechaSolicitudRevision;
+    private void setFechaSolicitudRevision(final LocalDateTime fechaSolicitudRevision) {
+        this.fechaSolicitudRevision = UtilDate.getDefault(fechaSolicitudRevision);
     }
 
-    private void setFechaLimiteRevision(LocalDateTime fechaLimiteRevision) {
-        this.fechaLimiteRevision = fechaLimiteRevision;
+    private void setFechaLimiteRevision(final LocalDateTime fechaLimiteRevision) {
+        this.fechaLimiteRevision = UtilDate.getDefault(fechaLimiteRevision);
     }
 
-    private void setFechaCompletitudRevision(LocalDateTime fechaCompletitudRevision) {
-        this.fechaCompletitudRevision = fechaCompletitudRevision;
+    private void setFechaCompletitudRevision(final LocalDateTime fechaCompletitudRevision) {
+        this.fechaCompletitudRevision = UtilDate.getDefault(fechaCompletitudRevision);
     }
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = estado;
+    private void setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    }
+    public static RevisionEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

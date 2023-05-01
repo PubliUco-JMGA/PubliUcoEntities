@@ -1,14 +1,24 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
+
 import java.util.UUID;
 
-public class PerfilEntity {
+public final class PerfilEntity {
     private UUID identificador;
     private LectorEntity lector;
     private RespuestaEntity deseaRecibirRecomendacionesDeCategoria;
     private RespuestaEntity deseaRecibirRecomendacionesDeAutor;
+    public static PerfilEntity DEFAULT_OBJECT = new PerfilEntity();
 
-
+    private PerfilEntity() {
+        super();
+        setIdentificador(UtilUUID.getDefaultValue());
+        setLector(LectorEntity.getDefaultObject());
+        setDeseaRecibirRecomendacionesDeCategoria(RespuestaEntity.getDefaultObject());
+        setDeseaRecibirRecomendacionesDeAutor(RespuestaEntity.getDefaultObject());
+    }
 
     public PerfilEntity(UUID identificador, LectorEntity lector, RespuestaEntity deseaRecibirRecomendacionesDeCategoria, RespuestaEntity deseaRecibirRecomendacionesDeAutor) {
        super();
@@ -34,20 +44,23 @@ public class PerfilEntity {
         return deseaRecibirRecomendacionesDeAutor;
     }
 
-    public PerfilEntity setIdentificador(UUID identificaodr) {
-        this.identificador = identificador;
+    public PerfilEntity setIdentificador(UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
         return this;
     }
 
-    private void setLector(LectorEntity lector) {
-        this.lector = lector;
+    private void setLector(final LectorEntity lector) {
+        this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
     }
 
-    private void setDeseaRecibirRecomendacionesDeCategoria(RespuestaEntity deseaRecibirRecomendacionesDeCategoria) {
-        this.deseaRecibirRecomendacionesDeCategoria = deseaRecibirRecomendacionesDeCategoria;
+    private void setDeseaRecibirRecomendacionesDeCategoria(final RespuestaEntity deseaRecibirRecomendacionesDeCategoria) {
+        this.deseaRecibirRecomendacionesDeCategoria = UtilObject.getDefault(deseaRecibirRecomendacionesDeCategoria, RespuestaEntity.getDefaultObject());
     }
 
-    private void setDeseaRecibirRecomendacionesDeAutor(RespuestaEntity deseaRecibirRecomendacionesDeAutor) {
-        this.deseaRecibirRecomendacionesDeAutor = deseaRecibirRecomendacionesDeAutor;
+    private void setDeseaRecibirRecomendacionesDeAutor(final RespuestaEntity deseaRecibirRecomendacionesDeAutor) {
+        this.deseaRecibirRecomendacionesDeAutor = UtilObject.getDefault(deseaRecibirRecomendacionesDeAutor, RespuestaEntity.getDefaultObject());
+    }
+    public static PerfilEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

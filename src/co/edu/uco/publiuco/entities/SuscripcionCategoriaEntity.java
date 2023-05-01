@@ -1,12 +1,21 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
+
 import java.util.UUID;
 
-public class SuscripcionCategoriaEntity {
+public final class SuscripcionCategoriaEntity {
     private UUID identificador;
     private PerfilEntity perfil;
     private PlanCategoriaEntity planCategoria;
+    public static SuscripcionCategoriaEntity DEFAULT_OBJECT = new SuscripcionCategoriaEntity();
 
+    private SuscripcionCategoriaEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setPerfil(PerfilEntity.getDefaultObject());
+        setPlanCategoria(PlanCategoriaEntity.getDefaultObject());
+    }
 
     public SuscripcionCategoriaEntity(UUID identificador, PerfilEntity perfil, PlanCategoriaEntity planCategoria) {
         setIdentificador(identificador);
@@ -26,15 +35,18 @@ public class SuscripcionCategoriaEntity {
         return planCategoria;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setPerfil(PerfilEntity perfil) {
-        this.perfil = perfil;
+    private void setPerfil(final PerfilEntity perfil) {
+        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.getDefaultObject());
     }
 
-    private void setPlanCategoria(PlanCategoriaEntity planCategoria) {
-        this.planCategoria = planCategoria;
+    private void setPlanCategoria(final PlanCategoriaEntity planCategoria) {
+        this.planCategoria = UtilObject.getDefault(planCategoria, PlanCategoriaEntity.getDefaultObject());
+    }
+    public static SuscripcionCategoriaEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

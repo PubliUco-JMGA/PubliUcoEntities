@@ -1,14 +1,26 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilDate;
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class HistorialAccesoPublicacionEntity {
+public final class HistorialAccesoPublicacionEntity {
     private UUID identificador;
     private LectorEntity lector;
     private PublicacionEntity publicacion;
     private LocalDateTime fechaAcceso;
+    public static HistorialAccesoPublicacionEntity DEFAULT_OBJECT = new HistorialAccesoPublicacionEntity();
 
+    private HistorialAccesoPublicacionEntity() {
+        super();
+        setIdentificador(UtilUUID.getDefaultValue());
+        setLector(LectorEntity.getDefaultObject());
+        setPublicacion(PublicacionEntity.getDefaultObject());
+        setFechaAcceso(UtilDate.getDefaultValue());
+    }
 
     public HistorialAccesoPublicacionEntity(UUID identificador, LectorEntity lector, PublicacionEntity publicacion, LocalDateTime fechaAcceso) {
         super();
@@ -34,19 +46,22 @@ public class HistorialAccesoPublicacionEntity {
         return fechaAcceso;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setLector(LectorEntity lector) {
-        this.lector = lector;
+    private void setLector(final LectorEntity lector) {
+        this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
     }
 
-    private void setPublicacion(PublicacionEntity publicacion) {
-        this.publicacion = publicacion;
+    private void setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
     }
 
-    private void setFechaAcceso(LocalDateTime fechaAcceso) {
-        this.fechaAcceso = fechaAcceso;
+    private void setFechaAcceso(final LocalDateTime fechaAcceso) {
+        this.fechaAcceso = UtilDate.getDefault(fechaAcceso);
+    }
+    public static HistorialAccesoPublicacionEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

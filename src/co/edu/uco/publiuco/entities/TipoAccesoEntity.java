@@ -1,15 +1,24 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.util.UUID;
 
-public class TipoAccesoEntity {
+public final class TipoAccesoEntity {
     private UUID identificador;
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
+    public static TipoAccesoEntity DEFAULT_OBJECT = new TipoAccesoEntity();
 
+    private TipoAccesoEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setNombre(UtilText.getDefaultValue());
+        setDescripcion(UtilText.getDefaultValue());
+        setEstado(EstadoEntity.getDefaultObject());
+    }
     public TipoAccesoEntity(UUID identificador, String nombre, String descripcion, EstadoEntity estado) {
         setIdentificador(identificador);
         setNombre(nombre);
@@ -33,20 +42,23 @@ public class TipoAccesoEntity {
         return estado;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setNombre(String nombre) {
+    private void setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
     }
 
-    private void setDescripcion(String descripcion) {
+    private void setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
     }
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = estado;
+    private void setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    }
+    public static TipoAccesoEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 
 }

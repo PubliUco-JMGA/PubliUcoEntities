@@ -1,17 +1,25 @@
 package co.edu.uco.publiuco.entities;
 
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.util.UUID;
 
-public class TipoEstadoEntity {
+public final class TipoEstadoEntity {
     private UUID identificador;
     private String nombre;
+    private String descripcion;
+    public static TipoEstadoEntity DEFAULT_OBJECT = new TipoEstadoEntity();
 
-
-    public TipoEstadoEntity(UUID identificador, String nombre) {
+    private TipoEstadoEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setNombre(UtilText.getDefaultValue());
+        setDescripcion(UtilText.getDefaultValue());
+    }
+    public TipoEstadoEntity(UUID identificador, String nombre, String descripcion) {
         setIdentificador(identificador);
         setNombre(nombre);
+        setDescripcion(descripcion);
     }
 
     public UUID getIdentificador() {
@@ -22,18 +30,26 @@ public class TipoEstadoEntity {
         return nombre;
     }
 
-
-
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    private void setNombre(String nombre) {
+
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
+    }
+
+    private void setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
     }
 
+    private void setDescripcion(final String descripcion) {
+        this.descripcion = UtilText.applyTrim(descripcion);
+    }
 
-
+    public static TipoEstadoEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
+    }
 
 }
 

@@ -1,14 +1,21 @@
 package co.edu.uco.publiuco.entities;
 
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.util.UUID;
 
-public class RespuestaEntity {
+public final class RespuestaEntity {
     private UUID identificador;
     private String nombre;
     private String descripcion;
+    public static RespuestaEntity DEFAULT_OBJECT = new RespuestaEntity();
 
+    private RespuestaEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setNombre(UtilText.getDefaultValue());
+        setDescripcion(UtilText.getDefaultValue());
+    }
 
     public RespuestaEntity(UUID identificador, String nombre, String descripcion) {
         setIdentificador(identificador);
@@ -28,15 +35,18 @@ public class RespuestaEntity {
         return descripcion;
     }
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setNombre(String nombre) {
+    private void setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
     }
 
-    private void setDescripcion(String descripcion) {
+    private void setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+    }
+    public static RespuestaEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

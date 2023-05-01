@@ -1,18 +1,29 @@
 package co.edu.uco.publiuco.entities;
 
 import co.edu.uco.publiuco.crosscutting.utils.UtilDate;
+import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
 import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class CalificacionEntity {
+public final class CalificacionEntity {
     private UUID identificador;
     private PublicacionEntity publicacion;
     private LectorEntity lector;
     private LocalDateTime fechaCalificacion;
     private String calificacion;
+    public static CalificacionEntity DEFAULT_OBJECT = new CalificacionEntity();
+
+    private CalificacionEntity() {
+        super();
+        setIdentificador(UtilUUID.getDefaultValue());
+        setPublicacion(PublicacionEntity.getDefaultObject());
+        setLector(LectorEntity.getDefaultObject());
+        setFechaCalificacion(UtilDate.getDefaultValue());
+        setCalificacion(UtilText.getDefaultValue());
+    }
 
     public CalificacionEntity(UUID identificador, PublicacionEntity publicacion, LectorEntity lector, LocalDateTime fechaCalificacion, String calificacion) {
         super();
@@ -43,28 +54,26 @@ public class CalificacionEntity {
         return calificacion;
     }
 
-    private CalificacionEntity setIdentificador(UUID identificador) {
-        this.identificador = identificador;
-        return this;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private CalificacionEntity setPublicacion(PublicacionEntity publicacion) {
-        this.publicacion = publicacion;
-        return this;
+    private void setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
     }
 
-    private CalificacionEntity setLector(LectorEntity lector) {
-        this.lector = lector;
-        return this;
+    private void setLector(final LectorEntity lector) {
+        this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
     }
 
-    private CalificacionEntity setFechaCalificacion(LocalDateTime fechaCalificacion) {
-        this.fechaCalificacion = fechaCalificacion;
-        return this;
+    private void setFechaCalificacion(final LocalDateTime fechaCalificacion) {
+        this.fechaCalificacion = UtilDate.getDefault(fechaCalificacion);
     }
 
-    private CalificacionEntity setCalificacion(String calificacion) {
+    private void setCalificacion(final String calificacion) {
         this.calificacion = UtilText.applyTrim(calificacion);
-        return this;
+    }
+    public static CalificacionEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
     }
 }

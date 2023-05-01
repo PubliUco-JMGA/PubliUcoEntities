@@ -1,14 +1,21 @@
 package co.edu.uco.publiuco.entities;
 
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
+import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.util.UUID;
 
-public class TipoRevisionEntity {
+public final class TipoRevisionEntity {
     private UUID identificador;
     private String nombre;
     private String descripcion;
+    public static TipoRevisionEntity DEFAULT_OBJECT = new TipoRevisionEntity();
 
+    private TipoRevisionEntity() {
+        setIdentificador(UtilUUID.getDefaultValue());
+        setNombre(UtilText.getDefaultValue());
+        setDescripcion(UtilText.getDefaultValue());
+    }
     public TipoRevisionEntity(UUID identificador, String nombre, String descripcion) {
         setIdentificador(identificador);
         setNombre(nombre);
@@ -28,18 +35,20 @@ public class TipoRevisionEntity {
     }
 
 
-    private void setIdentificador(UUID identificador) {
-        this.identificador = identificador;
+    private void setIdentificador(final UUID identificador) {
+        this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setNombre(String nombre) {
+    private void setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
     }
 
-    private void setDescripcion(String descripcion) {
+    private void setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
     }
-
+    public static TipoRevisionEntity getDefaultObject (){
+        return DEFAULT_OBJECT;
+    }
 
 
 }

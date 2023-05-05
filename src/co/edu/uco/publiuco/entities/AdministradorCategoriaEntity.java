@@ -40,7 +40,7 @@ public final class AdministradorCategoriaEntity {
         return identificador;
     }
 
-    public final PersonaEntity getNombre() {
+    public final PersonaEntity getPersona() {
         return datosPersona;
     }
 

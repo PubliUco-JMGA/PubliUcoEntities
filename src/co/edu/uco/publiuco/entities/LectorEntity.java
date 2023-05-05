@@ -5,7 +5,7 @@ import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
 import java.util.UUID;
 
-public class LectorEntity {
+public final class LectorEntity {
     private UUID identificador;
     private PersonaEntity datosPersona;
     private EstadoEntity estado;

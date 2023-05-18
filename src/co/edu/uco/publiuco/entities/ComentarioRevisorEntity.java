@@ -9,24 +9,22 @@ import java.util.UUID;
 public final class ComentarioRevisorEntity {
     private UUID identificador;
     private RevisorRevisionEntity revisorRevision;
-    private TipoComentarioRevisorEntity tipoComentarioRevisor;
-    private String comentario;
+    private TipoComentarioRevisorEntity tipo;
+    private String contenido;
     public static ComentarioRevisorEntity DEFAULT_OBJECT = new ComentarioRevisorEntity();
 
-    public ComentarioRevisorEntity(UUID identificador, RevisorRevisionEntity revisorRevision, TipoComentarioRevisorEntity tipoComentarioRevisor, String comentario) {
-        super();
+    public ComentarioRevisorEntity(UUID identificador, RevisorRevisionEntity revisorRevision, TipoComentarioRevisorEntity tipo, String contenido) {
         setIdentificador(identificador);
         setRevisorRevision(revisorRevision);
-        setTipoComentarioRevisor(tipoComentarioRevisor);
-        setComentario(comentario);
+        setTipo(tipo);
+        setContenido(contenido);
 
     }
     private ComentarioRevisorEntity() {
-        super();
         setIdentificador(UtilUUID.getDefaultValue());
         setRevisorRevision(RevisorRevisionEntity.getDefaultObject());
-        setTipoComentarioRevisor(TipoComentarioRevisorEntity.getDefaultObject());
-        setComentario(UtilText.getDefaultValue());
+        setTipo(TipoComentarioRevisorEntity.getDefaultObject());
+        setContenido(UtilText.getDefaultValue());
 
     }
 
@@ -38,12 +36,12 @@ public final class ComentarioRevisorEntity {
         return revisorRevision;
     }
 
-    public TipoComentarioRevisorEntity getTipoComentarioRevisor() {
-        return tipoComentarioRevisor;
+    public TipoComentarioRevisorEntity getTipo() {
+        return tipo;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getContenido() {
+        return contenido;
     }
 
     private void setIdentificador(final UUID identificador) {
@@ -54,12 +52,12 @@ public final class ComentarioRevisorEntity {
         this.revisorRevision = UtilObject.getDefault(revisorRevision, RevisorRevisionEntity.getDefaultObject());
     }
 
-    private void setTipoComentarioRevisor(final TipoComentarioRevisorEntity tipoComentarioRevisor) {
-        this.tipoComentarioRevisor = UtilObject.getDefault(tipoComentarioRevisor, TipoComentarioRevisorEntity.getDefaultObject());
+    private void setTipo(final TipoComentarioRevisorEntity tipo) {
+        this.tipo = UtilObject.getDefault(tipo, TipoComentarioRevisorEntity.getDefaultObject());
     }
 
-    private void setComentario(final String comentario) {
-        this.comentario = UtilText.applyTrim(comentario);
+    private void setContenido(final String contenido) {
+        this.contenido = UtilText.applyTrim(contenido);
     }
     public static ComentarioRevisorEntity getDefaultObject (){
         return DEFAULT_OBJECT;

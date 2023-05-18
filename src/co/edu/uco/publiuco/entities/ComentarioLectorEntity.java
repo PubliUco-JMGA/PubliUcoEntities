@@ -1,5 +1,6 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.utils.UtilBoolean;
 import co.edu.uco.publiuco.utils.UtilDate;
 import co.edu.uco.publiuco.utils.UtilObject;
 import co.edu.uco.publiuco.utils.UtilText;
@@ -13,6 +14,7 @@ public final class ComentarioLectorEntity {
 	private LectorEntity lector;
 	private PublicacionEntity publicacion;
 	private ComentarioLectorEntity comentarioPadre;
+	 private boolean tienePadre;
 	private String contenido;
 	private LocalDateTime fechaCalificacion;
 	private EstadoEntity estado;
@@ -28,10 +30,11 @@ public final class ComentarioLectorEntity {
 		setContenido(UtilText.getDefaultValue());
 		setFechaCalificacion(UtilDate.getDefaultValue());
 		setEstado(EstadoEntity.getDefaultObject() );
+		setTienePadre(UtilBoolean.getDefaultValue());
 	}
 
 
-	public ComentarioLectorEntity(UUID identificador, LectorEntity lector, PublicacionEntity publicacion, ComentarioLectorEntity comentarioPadre, String contenido, LocalDateTime fechaCalificacion, EstadoEntity estado) {
+	public ComentarioLectorEntity(UUID identificador, LectorEntity lector, PublicacionEntity publicacion, ComentarioLectorEntity comentarioPadre, String contenido, LocalDateTime fechaCalificacion, EstadoEntity estado,boolean tienePadre) {
 		super();
 		setIdentificador(identificador);
 		setLector(lector);
@@ -40,8 +43,19 @@ public final class ComentarioLectorEntity {
 		setContenido(contenido);
 		setFechaCalificacion(fechaCalificacion);
 		setEstado(estado);
+		setTienePadre(tienePadre);
 	}
 
+
+
+	public boolean tienePadre() {
+		return tienePadre;
+	}
+
+
+	public void setTienePadre(boolean tienePadre) {
+		this.tienePadre = UtilBoolean.getDefault(tienePadre);
+	}
 
 
 	public UUID getIdentificador() {
@@ -64,7 +78,7 @@ public final class ComentarioLectorEntity {
 		return contenido;
 	}
 
-	public LocalDateTime getFechaCalificacion() {
+	public LocalDateTime getFechaComentario() {
 		return fechaCalificacion;
 	}
 
@@ -89,15 +103,15 @@ public final class ComentarioLectorEntity {
 	}
 
 	private void setEstado(final EstadoEntity estado) {
-		this.estado = estado;
+		this.estado = UtilObject.getDefault(estado, EstadoEntity.DEFAULT_OBJECT);
 	}
 
 	private void setContenido(final String contenido) {
-		this.contenido = contenido;
+		this.contenido = UtilText.applyTrim(contenido);
 	}
 
 	private void setFechaCalificacion(final LocalDateTime fechaCalificacion) {
-		this.fechaCalificacion = fechaCalificacion;
+		this.fechaCalificacion = UtilDate.getDefault(fechaCalificacion);
 	}
 
 	public static ComentarioLectorEntity getDefaultObject() {

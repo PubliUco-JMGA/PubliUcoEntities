@@ -8,7 +8,6 @@ import java.util.UUID;
 public final class EscritorEntity {
     private UUID identificador;
     private PersonaEntity datosPersona;
-    private TipoRelacionInstitucionEntity tipoRelacionInstitucion;
     private EstadoEntity estado;
     public static EscritorEntity DEFAULT_OBJECT = new EscritorEntity();
 
@@ -16,14 +15,12 @@ public final class EscritorEntity {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
         setDatosPersona(PersonaEntity.getDefaultObject());
-        setTipoRelacionInstitucion(TipoRelacionInstitucionEntity.getDefaultObject());
         setEstado(EstadoEntity.getDefaultObject());
     }
-    public EscritorEntity(UUID identificador, PersonaEntity datosPersona, TipoRelacionInstitucionEntity tipoRelacionInstitucion, EstadoEntity estado) {
+    public EscritorEntity(UUID identificador, PersonaEntity datosPersona, EstadoEntity estado) {
         super();
         setIdentificador(identificador);
         setDatosPersona(datosPersona);
-        setTipoRelacionInstitucion(tipoRelacionInstitucion);
         setEstado(estado);
     }
 
@@ -35,9 +32,6 @@ public final class EscritorEntity {
         return datosPersona;
     }
 
-    public TipoRelacionInstitucionEntity getTipoRelacionInstitucion() {
-        return tipoRelacionInstitucion;
-    }
 
     public EstadoEntity getEstado() {
         return estado;
@@ -51,9 +45,6 @@ public final class EscritorEntity {
         this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.getDefaultObject());
     }
 
-    private void setTipoRelacionInstitucion(TipoRelacionInstitucionEntity tipoRelacionInstitucion) {
-        this.tipoRelacionInstitucion = UtilObject.getDefault(tipoRelacionInstitucion, TipoRelacionInstitucionEntity.getDefaultObject());
-    }
 
     private void setEstado(EstadoEntity estado) {
         this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());

@@ -13,29 +13,41 @@ public final class ReporteEntity {
     private LectorEntity lector;
     private ComentarioLectorEntity comentario;
     private String razon;
-    private TipoReporteEntity tipoReporte;
+    private TipoReporteEntity tipo;
     private LocalDateTime fechaReporte;
-    public static ReporteEntity DEFAULT_OBJECT = new ReporteEntity();
+    private EstadoEntity estado;
+    public static final ReporteEntity DEFAULT_OBJECT = new ReporteEntity();
 
     private ReporteEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
         setLector(LectorEntity.getDefaultObject());
         setComentario(ComentarioLectorEntity.getDefaultObject());
         setRazon(UtilText.getDefaultValue());
-        setTipoReporte(TipoReporteEntity.getDefaultObject());
+        setTipo(TipoReporteEntity.getDefaultObject());
         setFechaReporte(UtilDate.getDefaultValue());
+        setEstado(EstadoEntity.getDefaultObject());
     }
 
-    public ReporteEntity(UUID identificador, LectorEntity lector, ComentarioLectorEntity comentario, String razon, TipoReporteEntity tipoReporte, LocalDateTime fechaReporte) {
+    public ReporteEntity(UUID identificador, LectorEntity lector, ComentarioLectorEntity comentario, String razon, TipoReporteEntity tipo, LocalDateTime fechaReporte, EstadoEntity estado) {
         setIdentificador(identificador);
         setLector(lector);
         setComentario(comentario);
         setRazon(razon);
-        setTipoReporte(tipoReporte);
+        setTipo(tipo);
         setFechaReporte(fechaReporte);
+        setEstado(estado);
     }
 
-    public UUID getIdentificador() {
+    
+    public EstadoEntity getEstado() {
+		return estado;
+	}
+
+	private void setEstado(EstadoEntity estado) {
+		this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+	}
+
+	public UUID getIdentificador() {
         return identificador;
     }
 
@@ -51,8 +63,8 @@ public final class ReporteEntity {
         return razon;
     }
 
-    public TipoReporteEntity getTipoReporte() {
-        return tipoReporte;
+    public TipoReporteEntity getTipo() {
+        return tipo;
     }
 
     public LocalDateTime getFechaReporte() {
@@ -75,8 +87,8 @@ public final class ReporteEntity {
         this.razon = UtilText.applyTrim(razon);
     }
 
-    private void setTipoReporte(final TipoReporteEntity tipoReporte) {
-        this.tipoReporte = UtilObject.getDefault(tipoReporte, TipoReporteEntity.getDefaultObject());
+    private void setTipo(final TipoReporteEntity tipo) {
+        this.tipo = UtilObject.getDefault(tipo, TipoReporteEntity.getDefaultObject());
     }
 
     private void setFechaReporte(final LocalDateTime fechaReporte) {

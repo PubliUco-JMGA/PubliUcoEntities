@@ -12,7 +12,7 @@ public final class EstadoEntity {
 
     private UUID identificador;
     private String nombre;
-    private TipoEstadoEntity tipoEstado;
+    private TipoEstadoEntity tipo;
     public static EstadoEntity DEFAULT_OBJECT = new EstadoEntity();
 
 
@@ -20,15 +20,15 @@ public final class EstadoEntity {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
         setNombre(UtilText.getDefaultValue());
-        setTipoEstado(TipoEstadoEntity.getDefaultObject());
+        setTipo(TipoEstadoEntity.getDefaultObject());
     }
 
 
-    public EstadoEntity(UUID identificador, String nombre, TipoEstadoEntity tipoEstado) {
+    public EstadoEntity(UUID identificador, String nombre, TipoEstadoEntity tipo) {
         super();
         setIdentificador(identificador);
         setNombre(nombre);
-        setTipoEstado(tipoEstado);
+        setTipo(tipo);
     }
 
     private final void setIdentificador(final UUID identificador) {
@@ -39,9 +39,9 @@ public final class EstadoEntity {
         this.nombre = UtilText.applyTrim(nombre);
     }
 
-    private final void setTipoEstado(final TipoEstadoEntity tipoEstado) {
+    private final void setTipo(final TipoEstadoEntity tipo) {
 
-        this.tipoEstado = UtilObject.getDefault(tipoEstado, TipoEstadoEntity.getDefaultObject());
+        this.tipo = UtilObject.getDefault(tipo, TipoEstadoEntity.getDefaultObject());
     }
 
     public final UUID getIdentificador() {
@@ -52,8 +52,8 @@ public final class EstadoEntity {
         return nombre;
     }
 
-    public final TipoEstadoEntity getTipoEstado() {
-        return tipoEstado;
+    public final TipoEstadoEntity getTipo() {
+        return tipo;
     }
 
     public static EstadoEntity getDefaultObject(){

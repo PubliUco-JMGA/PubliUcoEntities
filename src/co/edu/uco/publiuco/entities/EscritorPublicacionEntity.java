@@ -9,7 +9,7 @@ public final class EscritorPublicacionEntity {
     private UUID identificador;
     private PublicacionEntity publicacion;
     private EscritorEntity escritor;
-    private TipoEscritorEntity tipoEscritor;
+    private TipoEscritorEntity tipo;
     public static EscritorPublicacionEntity DEFAULT_OBJECT = new EscritorPublicacionEntity();
 
     private EscritorPublicacionEntity() {
@@ -17,15 +17,15 @@ public final class EscritorPublicacionEntity {
         setIdentificador(UtilUUID.getDefaultValue());
         setPublicacion(PublicacionEntity.getDefaultObject());
         setEscritor(EscritorEntity.getDefaultObject());
-        setTipoEscritor(TipoEscritorEntity.getDefaultObject());
+        setTipo(TipoEscritorEntity.getDefaultObject());
     }
 
-    public EscritorPublicacionEntity(UUID identificador, PublicacionEntity publicacion, EscritorEntity escritor, TipoEscritorEntity tipoEscritor) {
+    public EscritorPublicacionEntity(UUID identificador, PublicacionEntity publicacion, EscritorEntity escritor, TipoEscritorEntity tipo) {
         super();
         setIdentificador(identificador);
         setPublicacion(publicacion);
         setEscritor(escritor);
-        setTipoEscritor(tipoEscritor);
+        setTipo(tipo);
     }
 
     public UUID getIdentificador() {
@@ -40,8 +40,8 @@ public final class EscritorPublicacionEntity {
         return escritor;
     }
 
-    public TipoEscritorEntity getTipoEscritor() {
-        return tipoEscritor;
+    public TipoEscritorEntity getTipo() {
+        return tipo;
     }
 
     private void setIdentificador(final UUID identificador) {
@@ -56,8 +56,8 @@ public final class EscritorPublicacionEntity {
         this.escritor = UtilObject.getDefault(escritor, EscritorEntity.getDefaultObject());
     }
 
-    private void setTipoEscritor(final TipoEscritorEntity tipoEscritor) {
-        this.tipoEscritor = UtilObject.getDefault(tipoEscritor, TipoEscritorEntity.getDefaultObject());
+    private void setTipo(final TipoEscritorEntity tipo) {
+        this.tipo = UtilObject.getDefault(tipo, TipoEscritorEntity.getDefaultObject());
     }
     public static EscritorPublicacionEntity getDefaultObject (){
         return DEFAULT_OBJECT;

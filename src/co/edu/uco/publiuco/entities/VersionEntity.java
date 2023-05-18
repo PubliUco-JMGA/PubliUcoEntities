@@ -7,53 +7,58 @@ import java.util.UUID;
 
 public final class VersionEntity {
     private UUID identificador;
-    private PublicacionEntity publicacion;
     private VersionEntity versionAnterior;
+    private boolean tieneVersionAnterior;
     private Integer numeroVersion;
     private LocalDateTime fechaCreacion;
-    private LocalDateTime ultimaFechaModificacion;
+    private LocalDateTime fechaUltimaModificacion;
     private String titulo;
     private String resumen;
     private String cuerpo;
     private EstadoEntity estado;
 
-    public static VersionEntity DEFAULT_OBJECT = new VersionEntity();
+    public static final VersionEntity DEFAULT_OBJECT = new VersionEntity();
 
 
     private VersionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setPublicacion(PublicacionEntity.getDefaultObject());
         setVersionAnterior(getDefaultObject());
         setNumeroVersion(UtilNumber.getIntegerDefaultValue());
         setFechaCreacion(UtilDate.getDefaultValue());
-        setUltimaFechaModificacion(UtilDate.getDefaultValue());
+        setFechaUltimaModificacion(UtilDate.getDefaultValue());
         setTitulo(UtilText.getDefaultValue());
         setResumen(UtilText.getDefaultValue());
         setCuerpo(UtilText.getDefaultValue());
         setEstado(EstadoEntity.getDefaultObject());
+        setTieneVersionAnterior(UtilBoolean.getDefaultValue());
     }
 
-    public VersionEntity(UUID identificador, PublicacionEntity publicacion, VersionEntity versionAnterior, int numeroVersion, LocalDateTime fechaCreacion, LocalDateTime ultimaFechaModificacion, String titulo, String resumen, String cuerpo, EstadoEntity estado) {
+    public VersionEntity(UUID identificador, VersionEntity versionAnterior, int numeroVersion, LocalDateTime fechaCreacion, LocalDateTime fechaUltimaModificacion, String titulo, String resumen, String cuerpo, EstadoEntity estado,boolean tieneVersionAnterior) {
         setIdentificador(identificador);
-        setPublicacion(publicacion);
         setVersionAnterior(versionAnterior);
         setNumeroVersion(numeroVersion);
         setFechaCreacion(fechaCreacion);
-        setUltimaFechaModificacion(ultimaFechaModificacion);
+        setFechaUltimaModificacion(fechaUltimaModificacion);
         setTitulo(titulo);
         setResumen(resumen);
         setCuerpo(cuerpo);
         setEstado(estado);
+        setTieneVersionAnterior(tieneVersionAnterior);
     }
 
+    
+    public boolean tieneVersionAnterior() {
+		return tieneVersionAnterior;
+	}
 
-    public UUID getIdentificador() {
+	private void setTieneVersionAnterior(boolean tieneVersionAnterior) {
+		this.tieneVersionAnterior = UtilBoolean.getDefault(tieneVersionAnterior);
+	}
+
+	public UUID getIdentificador() {
         return identificador;
     }
 
-    public PublicacionEntity getPublicacion() {
-        return publicacion;
-    }
 
     public VersionEntity getVersionAnterior() {
         return versionAnterior;
@@ -67,8 +72,8 @@ public final class VersionEntity {
         return fechaCreacion;
     }
 
-    public LocalDateTime getUltimaFechaModificacion() {
-        return ultimaFechaModificacion;
+    public LocalDateTime getFechaUltimaModificacion() {
+        return fechaUltimaModificacion;
     }
 
     public String getTitulo() {
@@ -91,10 +96,6 @@ public final class VersionEntity {
         this.identificador = UtilUUID.getDefault(identificador);
     }
 
-    private void setPublicacion(final PublicacionEntity publicacion) {
-        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
-    }
-
     private void setVersionAnterior(VersionEntity versionAnterior) {
         this.versionAnterior = UtilObject.getDefault(versionAnterior, VersionEntity.getDefaultObject());
     }
@@ -107,12 +108,12 @@ public final class VersionEntity {
         this.fechaCreacion = UtilDate.getDefault(fechaCreacion);
     }
 
-    private void setUltimaFechaModificacion(final LocalDateTime ultimaFechaModificacion) {
-        this.ultimaFechaModificacion = UtilDate.getDefault(ultimaFechaModificacion);
+    private void setFechaUltimaModificacion(final LocalDateTime fechaUltimaModificacion) {
+        this.fechaUltimaModificacion = UtilDate.getDefault(fechaUltimaModificacion);
     }
 
     private void setTitulo(final String titulo) {
-        this.titulo = UtilText.applyTrim(titulo);
+        this.titulo = UtilText.applyTrim(titulo);	
     }
 
     private void setResumen(final String resumen) {

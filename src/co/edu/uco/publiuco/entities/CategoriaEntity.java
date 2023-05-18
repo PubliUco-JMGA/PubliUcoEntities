@@ -1,5 +1,6 @@
 package co.edu.uco.publiuco.entities;
 
+import co.edu.uco.publiuco.utils.UtilBoolean;
 import co.edu.uco.publiuco.utils.UtilObject;
 import co.edu.uco.publiuco.utils.UtilText;
 import co.edu.uco.publiuco.utils.UtilUUID;
@@ -9,6 +10,7 @@ import java.util.UUID;
 public final class CategoriaEntity {
     private UUID identificador;
     private CategoriaEntity categoriaPadre;
+    private boolean tienePadre;
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
@@ -23,7 +25,7 @@ public final class CategoriaEntity {
         setEstado(EstadoEntity.getDefaultObject());
     }
 
-    public CategoriaEntity(UUID identificador, CategoriaEntity categoriaPadre, String nombre, String descripcion, EstadoEntity estado) {
+    public CategoriaEntity(UUID identificador, CategoriaEntity categoriaPadre, String nombre, String descripcion, EstadoEntity estado, boolean tienePadre) {
         super();
         setIdentificador(identificador);
         setCategoriaPadre(categoriaPadre);
@@ -33,7 +35,15 @@ public final class CategoriaEntity {
     }
 
 
-    public UUID getIdentificador() {
+    public boolean tienePadre() {
+		return tienePadre;
+	}
+
+	public void setTienePadre(boolean tienePadre) {
+		this.tienePadre = UtilBoolean.getDefault(tienePadre);
+	}
+
+	public UUID getIdentificador() {
         return identificador;
     }
 

@@ -15,6 +15,11 @@ public final class AdministradorCategoriaEntity {
         setPersona(PersonaEntity.getDefaultObject());
         setEstado(EstadoEntity.getDefaultObject());
     }
+    public static final  AdministradorCategoriaEntity createWithIdentificador(UUID identificador) {
+		
+    	return new AdministradorCategoriaEntity(identificador,PersonaEntity.getDefaultObject(),EstadoEntity.getDefaultObject());
+        
+    }
 
 
     public AdministradorCategoriaEntity(UUID identificador, PersonaEntity persona, EstadoEntity estado) {

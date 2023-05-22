@@ -14,7 +14,7 @@ public final class CategoriaEntity {
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
-    public static CategoriaEntity DEFAULT_OBJECT = new CategoriaEntity();
+    public static final CategoriaEntity DEFAULT_OBJECT = new CategoriaEntity();
 
     private CategoriaEntity() {
         super();
@@ -68,7 +68,11 @@ public final class CategoriaEntity {
      }
 
     private void setCategoriaPadre(final CategoriaEntity categoriaPadre) {
-        this.categoriaPadre = UtilObject.getDefault(categoriaPadre, CategoriaEntity.getDefaultObject());
+    	if(tienePadre()) {
+            this.categoriaPadre = UtilObject.getDefault(categoriaPadre, getDefaultObject());
+        }else {
+			this.categoriaPadre = (CategoriaEntity) UtilObject.getDefaultValue();
+        }  
     }
 
     private void setNombre(final String nombre) {

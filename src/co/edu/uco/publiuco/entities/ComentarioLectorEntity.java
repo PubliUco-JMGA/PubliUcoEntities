@@ -99,7 +99,11 @@ public final class ComentarioLectorEntity {
 	}
 
 	private void setComentarioPadre(final ComentarioLectorEntity comentarioPadre) {
-		this.comentarioPadre = UtilObject.getDefault(comentarioPadre, ComentarioLectorEntity.getDefaultObject());
+		if(tienePadre()) {
+			this.comentarioPadre = UtilObject.getDefault(comentarioPadre, getDefaultObject());
+		}else {
+			this.comentarioPadre = (ComentarioLectorEntity) UtilObject.getDefaultValue();
+		}	
 	}
 
 	private void setEstado(final EstadoEntity estado) {

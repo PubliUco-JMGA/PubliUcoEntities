@@ -97,7 +97,11 @@ public final class VersionEntity {
     }
 
     private void setVersionAnterior(VersionEntity versionAnterior) {
-        this.versionAnterior = UtilObject.getDefault(versionAnterior, VersionEntity.getDefaultObject());
+    	if(tieneVersionAnterior()) {
+            this.versionAnterior = UtilObject.getDefault(versionAnterior, getDefaultObject());
+        }else {
+			this.versionAnterior = (VersionEntity) UtilObject.getDefaultValue();
+        }  
     }
 
     private void setNumeroVersion(final Integer numeroVersion) {

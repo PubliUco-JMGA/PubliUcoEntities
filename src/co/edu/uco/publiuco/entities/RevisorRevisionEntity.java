@@ -14,15 +14,14 @@ public final class RevisorRevisionEntity {
     private LocalDateTime fechaAsignacionRevision;
     private LocalDateTime fechaCompletitudRevision;
     private EstadoEntity estado;
-    public static RevisorRevisionEntity DEFAULT_OBJECT = new RevisorRevisionEntity();
 
     private RevisorRevisionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setRevision(RevisionEntity.getDefaultObject());
-        setRevisor(RevisorEntity.getDefaultObject());
+        setRevision(RevisionEntity.create());
+        setRevisor(RevisorEntity.create());
         setFechaAsignacionRevision(UtilDate.getDefaultValue());
         setFechaCompletitudRevision(UtilDate.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
 
     }
     public RevisorRevisionEntity(UUID identificador, RevisionEntity revision, RevisorEntity revisor, LocalDateTime fechaAsignacionRevision, LocalDateTime fechaCompletitudRevision, EstadoEntity estado) {
@@ -63,26 +62,31 @@ public final class RevisorRevisionEntity {
         return this;
     }
 
-    private void setRevision(final RevisionEntity revision) {
-        this.revision = UtilObject.getDefault(revision, RevisionEntity.getDefaultObject());
+    public RevisorRevisionEntity setRevision(final RevisionEntity revision) {
+        this.revision = UtilObject.getDefault(revision, RevisionEntity.create());
+        return this;
     }
 
-    private void setRevisor(final RevisorEntity revisor) {
-        this.revisor = UtilObject.getDefault(revisor, RevisorEntity.getDefaultObject());
+    public RevisorRevisionEntity setRevisor(final RevisorEntity revisor) {
+        this.revisor = UtilObject.getDefault(revisor, RevisorEntity.create());
+        return this;
     }
 
-    private void setFechaAsignacionRevision(final LocalDateTime fechaAsignacionRevision) {
+    public RevisorRevisionEntity setFechaAsignacionRevision(final LocalDateTime fechaAsignacionRevision) {
         this.fechaAsignacionRevision = UtilDate.getDefault(fechaAsignacionRevision);
+        return this;
     }
 
-    private void setFechaCompletitudRevision(final LocalDateTime fechaCompletitudRevision) {
+    public RevisorRevisionEntity setFechaCompletitudRevision(final LocalDateTime fechaCompletitudRevision) {
         this.fechaCompletitudRevision = UtilDate.getDefault(fechaCompletitudRevision);
+        return this;
     }
 
-    private void setEstado(final EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public RevisorRevisionEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static RevisorRevisionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static RevisorRevisionEntity create (){
+        return new RevisorRevisionEntity();
     }
 }

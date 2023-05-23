@@ -10,13 +10,12 @@ public final class TipoRelacionInstitucionEntity {
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
-    public static TipoRelacionInstitucionEntity DEFAULT_OBJECT = new TipoRelacionInstitucionEntity();
 
     private TipoRelacionInstitucionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
         setNombre(UtilText.getDefaultValue());
         setDescripcion(UtilText.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
     }
     public TipoRelacionInstitucionEntity(UUID identificador, String nombre, String descripcion, EstadoEntity estado) {
         setIdentificador(identificador);
@@ -41,23 +40,27 @@ public final class TipoRelacionInstitucionEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public TipoRelacionInstitucionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setNombre(final String nombre) {
+    public TipoRelacionInstitucionEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setDescripcion(final String descripcion) {
+    public TipoRelacionInstitucionEntity setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+        return this;
     }
 
-    private void setEstado(final EstadoEntity estado) {
+    public TipoRelacionInstitucionEntity setEstado(final EstadoEntity estado) {
         this.estado = estado;
+        return this;
     }
-    public static TipoRelacionInstitucionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static TipoRelacionInstitucionEntity create (){
+        return new TipoRelacionInstitucionEntity();
     }
 
 }

@@ -14,13 +14,12 @@ public final class CalificacionEntity {
     private LectorEntity lector;
     private LocalDateTime fechaCalificacion;
     private String calificacion;
-    public static CalificacionEntity DEFAULT_OBJECT = new CalificacionEntity();
 
     private CalificacionEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setPublicacion(PublicacionEntity.getDefaultObject());
-        setLector(LectorEntity.getDefaultObject());
+        setPublicacion(PublicacionEntity.create());
+        setLector(LectorEntity.create());
         setFechaCalificacion(UtilDate.getDefaultValue());
         setCalificacion(UtilText.getDefaultValue());
     }
@@ -54,26 +53,31 @@ public final class CalificacionEntity {
         return calificacion;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public CalificacionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPublicacion(final PublicacionEntity publicacion) {
-        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
+    public CalificacionEntity setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.create());
+        return this;
     }
 
-    private void setLector(final LectorEntity lector) {
-        this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
+    public CalificacionEntity setLector(final LectorEntity lector) {
+        this.lector = UtilObject.getDefault(lector, LectorEntity.create());
+        return this;
     }
 
-    private void setFechaCalificacion(final LocalDateTime fechaCalificacion) {
+    public CalificacionEntity setFechaCalificacion(final LocalDateTime fechaCalificacion) {
         this.fechaCalificacion = UtilDate.getDefault(fechaCalificacion);
+        return this;
     }
 
-    private void setCalificacion(final String calificacion) {
+    public CalificacionEntity setCalificacion(final String calificacion) {
         this.calificacion = UtilText.applyTrim(calificacion);
+        return this;
     }
-    public static CalificacionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static CalificacionEntity create (){
+        return new CalificacionEntity();
     }
 }

@@ -9,7 +9,6 @@ public final class PaisEntity {
     private UUID identificador;
     private String nombre;
     private String indicadorPais;
-    public static PaisEntity DEFAULT_OBJECT = new PaisEntity();
 
     private PaisEntity() {
         super();
@@ -37,18 +36,21 @@ public final class PaisEntity {
         return indicadorPais;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public PaisEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setNombre(final String nombre) {
+    public PaisEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setIndicadorPais(final String indicadorPais) {
+    public PaisEntity setIndicadorPais(final String indicadorPais) {
         this.indicadorPais = UtilText.applyTrim(indicadorPais);
+        return this;
     }
-    public static PaisEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PaisEntity create (){
+        return new PaisEntity();
     }
 }

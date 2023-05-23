@@ -9,7 +9,6 @@ public final class TipoReporteEntity {
     private UUID identificador;
     private String nombre;
     private String descripcion;
-    public static TipoReporteEntity DEFAULT_OBJECT = new TipoReporteEntity();
 
     private TipoReporteEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
@@ -35,19 +34,22 @@ public final class TipoReporteEntity {
     }
 
 
-    private void setIdentificador(final UUID identificador) {
+    public TipoReporteEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setNombre(final String nombre) {
+    public TipoReporteEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setDescripcion(final String descripcion) {
+    public TipoReporteEntity setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+        return this;
     }
-    public static TipoReporteEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static TipoReporteEntity create (){
+        return new TipoReporteEntity();
     }
 
 

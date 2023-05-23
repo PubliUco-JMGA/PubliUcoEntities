@@ -9,13 +9,12 @@ public final class PreferenciaCategoriaEntity {
     private UUID identificador;
     private PerfilEntity perfil;
     private CategoriaEntity categoria;
-    public static PreferenciaCategoriaEntity DEFAULT_OBJECT = new PreferenciaCategoriaEntity();
 
     private PreferenciaCategoriaEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setPerfil(PerfilEntity.getDefaultObject());
-        setCategoria(CategoriaEntity.getDefaultObject());
+        setPerfil(PerfilEntity.create());
+        setCategoria(CategoriaEntity.create());
     }
 
     public PreferenciaCategoriaEntity(UUID identificador, PerfilEntity perfil, CategoriaEntity categoria) {
@@ -37,18 +36,21 @@ public final class PreferenciaCategoriaEntity {
         return categoria;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public PreferenciaCategoriaEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPerfil(final PerfilEntity perfil) {
-        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.getDefaultObject());
+    public PreferenciaCategoriaEntity setPerfil(final PerfilEntity perfil) {
+        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.create());
+        return this;
     }
 
-    private void setCategoria(final CategoriaEntity categoria) {
-        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.getDefaultObject());
+    public PreferenciaCategoriaEntity setCategoria(final CategoriaEntity categoria) {
+        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.create());
+        return this;
     }
-    public static PreferenciaCategoriaEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PreferenciaCategoriaEntity create (){
+        return new PreferenciaCategoriaEntity();
     }
 }

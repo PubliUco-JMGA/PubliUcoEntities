@@ -14,15 +14,14 @@ public final class PublicacionEntity {
     private LocalDateTime fechaPublicacion;
     private VersionEntity versionPublicada;
     private EstadoEntity estado;
-    public static PublicacionEntity DEFAULT_OBJECT = new PublicacionEntity();
 
     private PublicacionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setCategoria(CategoriaEntity.getDefaultObject());
-        setTipoAcceso(TipoAccesoEntity.getDefaultObject());
+        setCategoria(CategoriaEntity.create());
+        setTipoAcceso(TipoAccesoEntity.create());
         setFechaPublicacion(UtilDate.getDefaultValue());
-        setVersionPublicada(VersionEntity.getDefaultObject());
-        setEstado(EstadoEntity.getDefaultObject());
+        setVersionPublicada(VersionEntity.create());
+        setEstado(EstadoEntity.create());
     }
 
     public PublicacionEntity(UUID identificador, CategoriaEntity categoria, TipoAccesoEntity tipoAcceso, LocalDateTime fechaPublicacion, VersionEntity versionPublicada, EstadoEntity estado) {
@@ -58,30 +57,36 @@ public final class PublicacionEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public PublicacionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setCategoria(final CategoriaEntity categoria) {
-        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.getDefaultObject());
+    public PublicacionEntity setCategoria(final CategoriaEntity categoria) {
+        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.create());
+        return this;
     }
 
-    private void setTipoAcceso(final TipoAccesoEntity tipoAcceso) {
-        this.tipoAcceso = UtilObject.getDefault(tipoAcceso, TipoAccesoEntity.getDefaultObject());
+    public PublicacionEntity setTipoAcceso(final TipoAccesoEntity tipoAcceso) {
+        this.tipoAcceso = UtilObject.getDefault(tipoAcceso, TipoAccesoEntity.create());
+        return this;
     }
 
-    private void setFechaPublicacion(final LocalDateTime fechaPublicacion) {
+    public PublicacionEntity setFechaPublicacion(final LocalDateTime fechaPublicacion) {
         this.fechaPublicacion = UtilDate.getDefault(fechaPublicacion);
+        return this;
     }
 
-    private void setVersionPublicada(final VersionEntity versionPublicada) {
-        this.versionPublicada = UtilObject.getDefault(versionPublicada, VersionEntity.getDefaultObject());
+    public PublicacionEntity setVersionPublicada(final VersionEntity versionPublicada) {
+        this.versionPublicada = UtilObject.getDefault(versionPublicada, VersionEntity.create());
+        return this;
     }
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public PublicacionEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static PublicacionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PublicacionEntity create (){
+        return new PublicacionEntity();
     }
 }

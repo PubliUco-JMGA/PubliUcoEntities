@@ -9,13 +9,12 @@ public final class EscritorEntity {
     private UUID identificador;
     private PersonaEntity datosPersona;
     private EstadoEntity estado;
-    public static EscritorEntity DEFAULT_OBJECT = new EscritorEntity();
 
     private EscritorEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setDatosPersona(PersonaEntity.getDefaultObject());
-        setEstado(EstadoEntity.getDefaultObject());
+        setDatosPersona(PersonaEntity.create());
+        setEstado(EstadoEntity.create());
     }
     public EscritorEntity(UUID identificador, PersonaEntity datosPersona, EstadoEntity estado) {
         super();
@@ -37,19 +36,22 @@ public final class EscritorEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public EscritorEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setDatosPersona(final PersonaEntity datosPersona) {
-        this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.getDefaultObject());
+    public EscritorEntity setDatosPersona(final PersonaEntity datosPersona) {
+        this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.create());
+        return this;
     }
 
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public EscritorEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado,EstadoEntity.create());
+        return this;
     }
-    public static EscritorEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static EscritorEntity create (){
+        return new EscritorEntity();
     }
 }

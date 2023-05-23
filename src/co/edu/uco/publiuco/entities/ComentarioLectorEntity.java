@@ -16,20 +16,19 @@ public final class ComentarioLectorEntity {
 	private ComentarioLectorEntity comentarioPadre;
 	 private boolean tienePadre;
 	private String contenido;
-	private LocalDateTime fechaCalificacion;
+	private LocalDateTime fechaComentario;
 	private EstadoEntity estado;
-	public static ComentarioLectorEntity DEFAULT_OBJECT = new ComentarioLectorEntity();
 
 
 	private ComentarioLectorEntity() {
 		super();
 		setIdentificador(UtilUUID.getDefaultValue());
-		setLector(LectorEntity.getDefaultObject());
-		setPublicacion(PublicacionEntity.getDefaultObject());
-		setComentarioPadre(getDefaultObject());
+		setLector(LectorEntity.create());
+		setPublicacion(PublicacionEntity.create());
+		setComentarioPadre(create());
 		setContenido(UtilText.getDefaultValue());
-		setFechaCalificacion(UtilDate.getDefaultValue());
-		setEstado(EstadoEntity.getDefaultObject() );
+		setFechaComentario(UtilDate.getDefaultValue());
+		setEstado(EstadoEntity.create() );
 		setTienePadre(UtilBoolean.getDefaultValue());
 	}
 
@@ -41,7 +40,7 @@ public final class ComentarioLectorEntity {
 		setComentarioPadre(comentarioPadre);
 		setPublicacion(publicacion);
 		setContenido(contenido);
-		setFechaCalificacion(fechaCalificacion);
+		setFechaComentario(fechaCalificacion);
 		setEstado(estado);
 		setTienePadre(tienePadre);
 	}
@@ -52,10 +51,6 @@ public final class ComentarioLectorEntity {
 		return tienePadre;
 	}
 
-
-	public void setTienePadre(boolean tienePadre) {
-		this.tienePadre = UtilBoolean.getDefault(tienePadre);
-	}
 
 
 	public UUID getIdentificador() {
@@ -79,46 +74,59 @@ public final class ComentarioLectorEntity {
 	}
 
 	public LocalDateTime getFechaComentario() {
-		return fechaCalificacion;
+		return fechaComentario;
 	}
 
 	public EstadoEntity getEstado() {
 		return estado;
 	}
 
-	private void setIdentificador(final UUID identificador) {
+	public ComentarioLectorEntity setIdentificador(final UUID identificador) {
 		this.identificador = UtilUUID.getDefault(identificador);
+		return this;
 	}
 
-	private void setLector(final LectorEntity lector) {
-		this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
+	public ComentarioLectorEntity setLector(final LectorEntity lector) {
+		this.lector = UtilObject.getDefault(lector, LectorEntity.create());
+		return this;
 	}
 
-	private void setPublicacion(final PublicacionEntity publicacion) {
-		this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
+	public ComentarioLectorEntity setPublicacion(final PublicacionEntity publicacion) {
+		this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.create());
+		return this;
 	}
 
-	private void setComentarioPadre(final ComentarioLectorEntity comentarioPadre) {
+	public ComentarioLectorEntity setComentarioPadre(final ComentarioLectorEntity comentarioPadre) {
 		if(tienePadre()) {
-			this.comentarioPadre = UtilObject.getDefault(comentarioPadre, getDefaultObject());
+			this.comentarioPadre = UtilObject.getDefault(comentarioPadre, ComentarioLectorEntity.create());
 		}else {
-			this.comentarioPadre = (ComentarioLectorEntity) UtilObject.getDefaultValue();
-		}	
+			this.comentarioPadre = (ComentarioLectorEntity) UtilObject.getNullValue();
+		}
+		return this;
 	}
 
-	private void setEstado(final EstadoEntity estado) {
-		this.estado = UtilObject.getDefault(estado, EstadoEntity.DEFAULT_OBJECT);
+	public ComentarioLectorEntity setEstado(final EstadoEntity estado) {
+		this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+		return this;
 	}
 
-	private void setContenido(final String contenido) {
-		this.contenido = UtilText.applyTrim(contenido);
+	public ComentarioLectorEntity setContenido(final String cotenido) {
+		this.contenido = UtilText.applyTrim(cotenido);
+		return this;
 	}
 
-	private void setFechaCalificacion(final LocalDateTime fechaCalificacion) {
-		this.fechaCalificacion = UtilDate.getDefault(fechaCalificacion);
+	public ComentarioLectorEntity setFechaComentario(final LocalDateTime fechaComentario) {
+		this.fechaComentario = UtilDate.getDefault(fechaComentario);
+		return this;
 	}
 
-	public static ComentarioLectorEntity getDefaultObject() {
-		return DEFAULT_OBJECT;
+
+	public ComentarioLectorEntity setTienePadre(boolean tienePadre) {
+		this.tienePadre = UtilBoolean.getDefault(tienePadre);
+		return this;
+	}
+
+	public static ComentarioLectorEntity create() {
+		return new ComentarioLectorEntity();
 	}
 }

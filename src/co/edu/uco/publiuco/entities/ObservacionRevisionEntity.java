@@ -16,17 +16,16 @@ public final class ObservacionRevisionEntity {
     private LocalDateTime fechaRevisionObservacion;
     private String observacion;
     private EstadoEntity estado;
-    public static ObservacionRevisionEntity DEFAULT_OBJECT = new ObservacionRevisionEntity();
 
     private ObservacionRevisionEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setEscritorPublicacion(EscritorPublicacionEntity.getDefaultObject());
-        setComentarioRevisor(ComentarioRevisorEntity.getDefaultObject());
+        setEscritorPublicacion(EscritorPublicacionEntity.create());
+        setComentarioRevisor(ComentarioRevisorEntity.create());
         setFechaReportePublicacion(UtilDate.getDefaultValue());
         setFechaRevisionObservacion(UtilDate.getDefaultValue());
         setObservacion(UtilText.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
     }
 
     public ObservacionRevisionEntity(UUID identificador, EscritorPublicacionEntity escritorPublicacion, ComentarioRevisorEntity comentarioRevisor, LocalDateTime fechaReportePublicacion, LocalDateTime fechaRevisionObservacion, String observacion, EstadoEntity estado) {
@@ -68,34 +67,41 @@ public final class ObservacionRevisionEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public ObservacionRevisionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setEscritorPublicacion(final EscritorPublicacionEntity escritorPublicacion) {
-        this.escritorPublicacion = UtilObject.getDefault(escritorPublicacion, EscritorPublicacionEntity.getDefaultObject());
+    public ObservacionRevisionEntity setEscritorPublicacion(final EscritorPublicacionEntity escritorPublicacion) {
+        this.escritorPublicacion = UtilObject.getDefault(escritorPublicacion, EscritorPublicacionEntity.create());
+        return this;
     }
 
-    private void setComentarioRevisor(final ComentarioRevisorEntity comentarioRevisor) {
-        this.comentarioRevisor = UtilObject.getDefault(comentarioRevisor, ComentarioRevisorEntity.getDefaultObject());
+    public ObservacionRevisionEntity setComentarioRevisor(final ComentarioRevisorEntity comentarioRevisor) {
+        this.comentarioRevisor = UtilObject.getDefault(comentarioRevisor, ComentarioRevisorEntity.create());
+        return this;
     }
 
-    private void setFechaReportePublicacion(final LocalDateTime fechaReportePublicacion) {
+    public ObservacionRevisionEntity setFechaReportePublicacion(final LocalDateTime fechaReportePublicacion) {
         this.fechaReportePublicacion = UtilDate.getDefault(fechaReportePublicacion);
+        return this;
     }
 
-    private void setFechaRevisionObservacion(final LocalDateTime fechaRevisionObservacion) {
+    public ObservacionRevisionEntity setFechaRevisionObservacion(final LocalDateTime fechaRevisionObservacion) {
         this.fechaRevisionObservacion = UtilDate.getDefault(fechaRevisionObservacion);
+        return this;
     }
 
-    private void setObservacion(final String observacion) {
+    public ObservacionRevisionEntity setObservacion(final String observacion) {
         this.observacion = UtilText.applyTrim(observacion);
+        return this;
     }
 
-    private void setEstado(final EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public ObservacionRevisionEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static ObservacionRevisionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static ObservacionRevisionEntity create (){
+        return new ObservacionRevisionEntity();
     }
 }

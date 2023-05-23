@@ -10,14 +10,13 @@ public final class EscritorPublicacionEntity {
     private PublicacionEntity publicacion;
     private EscritorEntity escritor;
     private TipoEscritorEntity tipo;
-    public static EscritorPublicacionEntity DEFAULT_OBJECT = new EscritorPublicacionEntity();
 
     private EscritorPublicacionEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setPublicacion(PublicacionEntity.getDefaultObject());
-        setEscritor(EscritorEntity.getDefaultObject());
-        setTipo(TipoEscritorEntity.getDefaultObject());
+        setPublicacion(PublicacionEntity.create());
+        setEscritor(EscritorEntity.create());
+        setTipo(TipoEscritorEntity.create());
     }
 
     public EscritorPublicacionEntity(UUID identificador, PublicacionEntity publicacion, EscritorEntity escritor, TipoEscritorEntity tipo) {
@@ -44,22 +43,26 @@ public final class EscritorPublicacionEntity {
         return tipo;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public EscritorPublicacionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPublicacion(final PublicacionEntity publicacion) {
-        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
+    public EscritorPublicacionEntity setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.create());
+        return this;
     }
 
-    private void setEscritor(final EscritorEntity escritor) {
-        this.escritor = UtilObject.getDefault(escritor, EscritorEntity.getDefaultObject());
+    public EscritorPublicacionEntity setEscritor(final EscritorEntity escritor) {
+        this.escritor = UtilObject.getDefault(escritor, EscritorEntity.create());
+        return this;
     }
 
-    private void setTipo(final TipoEscritorEntity tipo) {
-        this.tipo = UtilObject.getDefault(tipo, TipoEscritorEntity.getDefaultObject());
+    public EscritorPublicacionEntity setTipo(final TipoEscritorEntity tipoEscritor) {
+        this.tipo = UtilObject.getDefault(tipoEscritor, TipoEscritorEntity.create());
+        return this;
     }
-    public static EscritorPublicacionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static EscritorPublicacionEntity create (){
+        return new EscritorPublicacionEntity();
     }
 }

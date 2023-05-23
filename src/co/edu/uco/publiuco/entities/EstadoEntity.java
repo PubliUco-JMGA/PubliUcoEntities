@@ -13,14 +13,13 @@ public final class EstadoEntity {
     private UUID identificador;
     private String nombre;
     private TipoEstadoEntity tipo;
-    public static EstadoEntity DEFAULT_OBJECT = new EstadoEntity();
 
 
     private EstadoEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
         setNombre(UtilText.getDefaultValue());
-        setTipo(TipoEstadoEntity.getDefaultObject());
+        setTipo(TipoEstadoEntity.create());
     }
 
 
@@ -31,17 +30,20 @@ public final class EstadoEntity {
         setTipo(tipo);
     }
 
-    private final void setIdentificador(final UUID identificador) {
+    public final EstadoEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private final void setNombre(final String nombre) {
+    public final EstadoEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private final void setTipo(final TipoEstadoEntity tipo) {
+    public final EstadoEntity setTipo(final TipoEstadoEntity tipoEstado) {
 
-        this.tipo = UtilObject.getDefault(tipo, TipoEstadoEntity.getDefaultObject());
+        this.tipo = UtilObject.getDefault(tipoEstado, TipoEstadoEntity.create());
+        return this;
     }
 
     public final UUID getIdentificador() {
@@ -56,7 +58,7 @@ public final class EstadoEntity {
         return tipo;
     }
 
-    public static EstadoEntity getDefaultObject(){
-        return DEFAULT_OBJECT;
+    public static EstadoEntity create(){
+        return new EstadoEntity();
     }
 }

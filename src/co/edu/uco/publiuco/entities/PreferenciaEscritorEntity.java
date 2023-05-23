@@ -9,12 +9,11 @@ public final class PreferenciaEscritorEntity {
     private UUID identificador;
     private PerfilEntity perfil;
     private EscritorEntity escritor;
-    public static PreferenciaEscritorEntity DEFAULT_OBJECT = new PreferenciaEscritorEntity();
 
     private PreferenciaEscritorEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setPerfil(PerfilEntity.getDefaultObject());
-        setEscritor(EscritorEntity.getDefaultObject());
+        setPerfil(PerfilEntity.create());
+        setEscritor(EscritorEntity.create());
     }
     public PreferenciaEscritorEntity(UUID identificador, PerfilEntity perfil, EscritorEntity escritor) {
         setIdentificador(identificador);
@@ -34,18 +33,21 @@ public final class PreferenciaEscritorEntity {
         return escritor;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public PreferenciaEscritorEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPerfil(final PerfilEntity perfil) {
-        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.getDefaultObject());
+    public PreferenciaEscritorEntity setPerfil(final PerfilEntity perfil) {
+        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.create());
+        return this;
     }
 
-    private void setEscritor(final EscritorEntity escritor) {
-        this.escritor = UtilObject.getDefault(escritor, EscritorEntity.getDefaultObject());
+    public PreferenciaEscritorEntity setEscritor(final EscritorEntity escritor) {
+        this.escritor = UtilObject.getDefault(escritor, EscritorEntity.create());
+        return this;
     }
-    public static PreferenciaEscritorEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PreferenciaEscritorEntity create (){
+        return new PreferenciaEscritorEntity();
     }
 }

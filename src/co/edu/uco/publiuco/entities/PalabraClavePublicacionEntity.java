@@ -10,12 +10,11 @@ public final class PalabraClavePublicacionEntity {
     private UUID identificador;
     private PublicacionEntity publicacion;
     private String palabraClave;
-    public static PalabraClavePublicacionEntity DEFAULT_OBJECT = new PalabraClavePublicacionEntity();
 
     private PalabraClavePublicacionEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setPublicacion(PublicacionEntity.getDefaultObject());
+        setPublicacion(PublicacionEntity.create());
         setPalabraClave(UtilText.getDefaultValue());
     }
 
@@ -38,18 +37,21 @@ public final class PalabraClavePublicacionEntity {
         return palabraClave;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public PalabraClavePublicacionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPublicacion(final PublicacionEntity publicacion) {
-        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
+    public PalabraClavePublicacionEntity setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion,PublicacionEntity.create());
+        return this;
     }
 
-    private void setPalabraClave(final String palabraClave) {
+    public PalabraClavePublicacionEntity setPalabraClave(final String palabraClave) {
         this.palabraClave = UtilText.applyTrim(palabraClave);
+        return this;
     }
-    public static PalabraClavePublicacionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PalabraClavePublicacionEntity create (){
+        return new PalabraClavePublicacionEntity();
     }
 }

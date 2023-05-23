@@ -9,13 +9,12 @@ public final class LectorEntity {
     private UUID identificador;
     private PersonaEntity datosPersona;
     private EstadoEntity estado;
-    public static LectorEntity DEFAULT_OBJECT= new LectorEntity();
 
     private LectorEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setDatosPersona(PersonaEntity.getDefaultObject());
-        setEstado(EstadoEntity.getDefaultObject());
+        setDatosPersona(PersonaEntity.create());
+        setEstado(EstadoEntity.create());
     }
 
     public LectorEntity(UUID identificador, PersonaEntity datosPersona, EstadoEntity estado) {
@@ -37,19 +36,21 @@ public final class LectorEntity {
         return estado;
     }
 
-    public LectorEntity setIdentificador(UUID identificador) {
+    public LectorEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
         return this;
     }
 
-    private void setDatosPersona(PersonaEntity datosPersona) {
-        this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.getDefaultObject());
+    public LectorEntity setDatosPersona(final PersonaEntity datosPersona) {
+        this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.create());
+        return this;
     }
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public LectorEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static LectorEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static LectorEntity create (){
+        return new LectorEntity();
     }
 }

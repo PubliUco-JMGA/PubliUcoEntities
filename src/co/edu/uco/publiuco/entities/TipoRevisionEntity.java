@@ -9,7 +9,6 @@ public final class TipoRevisionEntity {
     private UUID identificador;
     private String nombre;
     private String descripcion;
-    public static TipoRevisionEntity DEFAULT_OBJECT = new TipoRevisionEntity();
 
     private TipoRevisionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
@@ -35,19 +34,22 @@ public final class TipoRevisionEntity {
     }
 
 
-    private void setIdentificador(final UUID identificador) {
+    public TipoRevisionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setNombre(final String nombre) {
+    public TipoRevisionEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setDescripcion(final String descripcion) {
+    public TipoRevisionEntity setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+        return this;
     }
-    public static TipoRevisionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static TipoRevisionEntity create (){
+        return new TipoRevisionEntity();
     }
 
 

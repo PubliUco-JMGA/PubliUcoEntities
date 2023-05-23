@@ -14,15 +14,15 @@ public final class CategoriaEntity {
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
-    public static final CategoriaEntity DEFAULT_OBJECT = new CategoriaEntity();
 
     private CategoriaEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setCategoriaPadre(CategoriaEntity.getDefaultObject());
+        setCategoriaPadre(CategoriaEntity.create());
         setNombre(UtilText.getDefaultValue());
         setDescripcion(UtilText.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
+        setTienePadre(UtilBoolean.getDefaultValue());
     }
 
     public CategoriaEntity(UUID identificador, CategoriaEntity categoriaPadre, String nombre, String descripcion, EstadoEntity estado, boolean tienePadre) {
@@ -32,6 +32,7 @@ public final class CategoriaEntity {
         setNombre(nombre);
         setDescripcion(descripcion);
         setEstado(estado);
+        setTienePadre(tienePadre);
     }
 
 
@@ -39,9 +40,6 @@ public final class CategoriaEntity {
 		return tienePadre;
 	}
 
-	public void setTienePadre(boolean tienePadre) {
-		this.tienePadre = UtilBoolean.getDefault(tienePadre);
-	}
 
 	public UUID getIdentificador() {
         return identificador;
@@ -63,30 +61,39 @@ public final class CategoriaEntity {
         return estado;
     }
 
-     private void setIdentificador(final UUID identificador) {
+    public CategoriaEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
-     }
+        return this;
+    }
 
-    private void setCategoriaPadre(final CategoriaEntity categoriaPadre) {
-    	if(tienePadre()) {
-            this.categoriaPadre = UtilObject.getDefault(categoriaPadre, getDefaultObject());
+    public CategoriaEntity setCategoriaPadre(final CategoriaEntity categoriaPadre) {
+        if(tienePadre()) {
+            this.categoriaPadre = UtilObject.getDefault(categoriaPadre, CategoriaEntity.create());
         }else {
-			this.categoriaPadre = (CategoriaEntity) UtilObject.getDefaultValue();
-        }  
+			this.categoriaPadre = (CategoriaEntity) UtilObject.getNullValue();
+        }
+    	return this;
     }
 
-    private void setNombre(final String nombre) {
+    public CategoriaEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setDescripcion(final String descripcion) {
+    public CategoriaEntity setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+        return this;
     }
 
-    private void setEstado(EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public CategoriaEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static CategoriaEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static CategoriaEntity create (){
+        return new CategoriaEntity();
     }
+    public CategoriaEntity setTienePadre(boolean tienePadre) {
+		this.tienePadre = UtilBoolean.getDefault(tienePadre);
+		return this;
+	}
 }

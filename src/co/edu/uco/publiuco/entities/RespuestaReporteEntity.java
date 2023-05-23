@@ -14,7 +14,6 @@ public class RespuestaReporteEntity {
 	private LocalDateTime fechaRespuestaReporte;
 	private String justificacion;
 	private EstadoEntity veredicto;
-	 public static RespuestaReporteEntity DEFAULT_OBJECT = new RespuestaReporteEntity();
 	
 	private RespuestaReporteEntity() {
 		setIdentificador(UtilUUID.getDefaultValue());
@@ -22,7 +21,7 @@ public class RespuestaReporteEntity {
 		setReporte(ReporteEntity.getDefaultObject());
 		setFechaRespuestaReporte(UtilDate.getDefaultValue());
 		setJustificacion(UtilText.getDefaultValue());
-		setVeredicto(EstadoEntity.getDefaultObject());
+		setVeredicto(EstadoEntity.create());
 	}
 	public RespuestaReporteEntity(UUID identificador, ReporteEntity reporte,
 			CategoriaAdministradorCategoriaEntity administradorCategoria, LocalDateTime fechaRespuestaReporte,
@@ -37,45 +36,48 @@ public class RespuestaReporteEntity {
 	public UUID getIdentificador() {
 		return identificador;
 	}
-	public RespuestaReporteEntity setIdentificador(UUID identificador) {
-		this.identificador = identificador;
-		return this;
-	}
 	public ReporteEntity getReporte() {
 		return reporte;
-	}
-	private void setReporte(ReporteEntity reporte) {
-		this.reporte = reporte;
 	}
 	public CategoriaAdministradorCategoriaEntity getAdministradorCategoria() {
 		return administradorCategoria;
 	}
-	private void setAdministradorCategoria(CategoriaAdministradorCategoriaEntity administradorCategoria) {
-		this.administradorCategoria = administradorCategoria;
-	}
 	public LocalDateTime getFechaRespuestaReporte() {
 		return fechaRespuestaReporte;
-	}
-	private void setFechaRespuestaReporte(LocalDateTime fechaRespuestaReporte) {
-		this.fechaRespuestaReporte = fechaRespuestaReporte;
 	}
 	public String getJustificacion() {
 		return justificacion;
 	}
-	private void setJustificacion(String justificacion) {
-		this.justificacion = justificacion;
-	}
 	public EstadoEntity getVeredicto() {
 		return veredicto;
 	}
-	private void setVeredicto(EstadoEntity veredicto) {
-		this.veredicto = veredicto;
+	public RespuestaReporteEntity setIdentificador(UUID identificador) {
+		this.identificador = identificador;
+		return this;
 	}
+	public RespuestaReporteEntity setReporte(ReporteEntity reporte) {
+		this.reporte = reporte;
+		return this;
+	}
+	public RespuestaReporteEntity setAdministradorCategoria(CategoriaAdministradorCategoriaEntity administradorCategoria) {
+		this.administradorCategoria = administradorCategoria;
+		return this;
+	}
+	public RespuestaReporteEntity setFechaRespuestaReporte(LocalDateTime fechaRespuestaReporte) {
+		this.fechaRespuestaReporte = fechaRespuestaReporte;
+		return this;
+	}
+	public RespuestaReporteEntity setJustificacion(String justificacion) {
+		this.justificacion = justificacion;
+		return this;
+	}
+	public RespuestaReporteEntity setVeredicto(EstadoEntity veredicto) {
+		this.veredicto = veredicto;
+		return this;
+	}
+	
 	public static RespuestaReporteEntity create (){
         return new RespuestaReporteEntity();
-    }
-	public static RespuestaReporteEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
     }
 	
 	

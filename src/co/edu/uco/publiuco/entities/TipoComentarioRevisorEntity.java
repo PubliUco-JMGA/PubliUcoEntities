@@ -9,7 +9,6 @@ public final class TipoComentarioRevisorEntity {
     private UUID identificador;
     private String nombre;
     private String descripcion;
-    public static TipoComentarioRevisorEntity DEFAULT_OBJECT = new TipoComentarioRevisorEntity();
 
     private TipoComentarioRevisorEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
@@ -35,20 +34,23 @@ public final class TipoComentarioRevisorEntity {
     }
 
 
-    private void setIdentificador(final UUID identificador) {
+    public TipoComentarioRevisorEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setNombre(final String nombre) {
+    public TipoComentarioRevisorEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setDescripcion(final String descripcion) {
+    public TipoComentarioRevisorEntity setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+        return this;
     }
 
-    public static TipoComentarioRevisorEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static TipoComentarioRevisorEntity create (){
+        return new TipoComentarioRevisorEntity();
     }
 
 }

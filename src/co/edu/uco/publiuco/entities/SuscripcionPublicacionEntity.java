@@ -9,12 +9,11 @@ public final class SuscripcionPublicacionEntity {
     private UUID identificador;
     private PerfilEntity perfil;
     private PlanPublicacionEntity planPublicacion;
-    public static SuscripcionPublicacionEntity DEFAULT_OBJECT = new SuscripcionPublicacionEntity();
 
     private SuscripcionPublicacionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setPerfil(PerfilEntity.getDefaultObject());
-        setPlanPublicacion(PlanPublicacionEntity.getDefaultObject());
+        setPerfil(PerfilEntity.create());
+        setPlanPublicacion(PlanPublicacionEntity.create());
     }
     public SuscripcionPublicacionEntity(UUID identificador, PerfilEntity perfil, PlanPublicacionEntity planPublicacion) {
         setIdentificador(identificador);
@@ -34,18 +33,21 @@ public final class SuscripcionPublicacionEntity {
         return planPublicacion;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public SuscripcionPublicacionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPerfil(PerfilEntity perfil) {
-        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.getDefaultObject());
+    public SuscripcionPublicacionEntity setPerfil(final PerfilEntity perfil) {
+        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.create());
+        return this;
     }
 
-    private void setPlanPublicacion(final PlanPublicacionEntity planPublicacion) {
-        this.planPublicacion = UtilObject.getDefault(planPublicacion, PlanPublicacionEntity.getDefaultObject());
+    public SuscripcionPublicacionEntity setPlanPublicacion(final PlanPublicacionEntity planPublicacion) {
+        this.planPublicacion = UtilObject.getDefault(planPublicacion, PlanPublicacionEntity.create());
+        return this;
     }
-    public static SuscripcionPublicacionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static SuscripcionPublicacionEntity create (){
+        return new SuscripcionPublicacionEntity();
     }
 }

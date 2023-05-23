@@ -22,14 +22,14 @@ public final class VersionEntity {
 
     private VersionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setVersionAnterior(getDefaultObject());
+        setVersionAnterior(create());
         setNumeroVersion(UtilNumber.getIntegerDefaultValue());
         setFechaCreacion(UtilDate.getDefaultValue());
         setFechaUltimaModificacion(UtilDate.getDefaultValue());
         setTitulo(UtilText.getDefaultValue());
         setResumen(UtilText.getDefaultValue());
         setCuerpo(UtilText.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
         setTieneVersionAnterior(UtilBoolean.getDefaultValue());
     }
 
@@ -92,46 +92,56 @@ public final class VersionEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public VersionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setVersionAnterior(VersionEntity versionAnterior) {
+
+    public VersionEntity setVersionAnterior(final VersionEntity versionAnterior) {
     	if(tieneVersionAnterior()) {
-            this.versionAnterior = UtilObject.getDefault(versionAnterior, getDefaultObject());
+            this.versionAnterior = UtilObject.getDefault(versionAnterior, VersionEntity.create());
         }else {
-			this.versionAnterior = (VersionEntity) UtilObject.getDefaultValue();
-        }  
+			this.versionAnterior = (VersionEntity) UtilObject.getNullValue();
+        }
+    	return this;
     }
 
-    private void setNumeroVersion(final Integer numeroVersion) {
+    public VersionEntity setNumeroVersion(final Integer numeroVersion) {
         this.numeroVersion = UtilNumber.getDefaultInt(numeroVersion);
+        return this;
     }
 
-    private void setFechaCreacion(final LocalDateTime fechaCreacion) {
+    public VersionEntity setFechaCreacion(final LocalDateTime fechaCreacion) {
         this.fechaCreacion = UtilDate.getDefault(fechaCreacion);
+        return this;
     }
 
-    private void setFechaUltimaModificacion(final LocalDateTime fechaUltimaModificacion) {
-        this.fechaUltimaModificacion = UtilDate.getDefault(fechaUltimaModificacion);
+    public VersionEntity setFechaUltimaModificacion(final LocalDateTime ultimaFechaModificacion) {
+        this.fechaUltimaModificacion = UtilDate.getDefault(ultimaFechaModificacion);
+        return this;
     }
 
-    private void setTitulo(final String titulo) {
-        this.titulo = UtilText.applyTrim(titulo);	
+    public VersionEntity setTitulo(final String titulo) {
+        this.titulo = UtilText.applyTrim(titulo);
+        return this;
     }
 
-    private void setResumen(final String resumen) {
+    public VersionEntity setResumen(final String resumen) {
         this.resumen = UtilText.applyTrim(resumen);
+        return this;
     }
 
-    private void setCuerpo(final String cuerpo) {
+    public VersionEntity setCuerpo(final String cuerpo) {
         this.cuerpo = UtilText.applyTrim(cuerpo);
+        return this;
     }
 
-    private void setEstado(final EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public VersionEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static VersionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static VersionEntity create (){
+        return new VersionEntity();
     }
 }

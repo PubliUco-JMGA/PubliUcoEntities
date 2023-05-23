@@ -15,16 +15,15 @@ public final class PlanCategoriaEntity {
     private LocalDateTime fechaDesde;
     private LocalDateTime fechaHasta;
     private EstadoEntity estado;
-    public static PlanCategoriaEntity DEFAULT_OBJECT = new PlanCategoriaEntity();
 
     private PlanCategoriaEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setCategoria(CategoriaEntity.getDefaultObject());
+        setCategoria(CategoriaEntity.create());
         setPrecio(UtilNumber.getRealDefaultValue());
         setFechaDesde(UtilDate.getDefaultValue());
         setFechaHasta(UtilDate.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
     }
 
     public PlanCategoriaEntity(UUID identificador, CategoriaEntity categoria, Double precio, LocalDateTime fechaDesde, LocalDateTime fechaHasta, EstadoEntity estado) {
@@ -61,30 +60,36 @@ public final class PlanCategoriaEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public PlanCategoriaEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setCategoria(final CategoriaEntity categoria) {
-        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.getDefaultObject());
+    public PlanCategoriaEntity setCategoria(final CategoriaEntity categoria) {
+        this.categoria = UtilObject.getDefault(categoria, CategoriaEntity.create());
+        return this;
     }
 
-    private void setPrecio(final Double precio) {
+    public PlanCategoriaEntity setPrecio(final Double precio) {
         this.precio = UtilNumber.getDefaultReal(precio);
+        return this;
     }
 
-    private void setFechaDesde(final LocalDateTime fechaDesde) {
+    public PlanCategoriaEntity setFechaDesde(final LocalDateTime fechaDesde) {
         this.fechaDesde = UtilDate.getDefault(fechaDesde);
+        return this;
     }
 
-    private void setFechaHasta(final LocalDateTime fechaHasta) {
+    public PlanCategoriaEntity setFechaHasta(final LocalDateTime fechaHasta) {
         this.fechaHasta = UtilDate.getDefault(fechaHasta);
+        return this;
     }
-
-    private void setEstado(final EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    
+    public PlanCategoriaEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static PlanCategoriaEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PlanCategoriaEntity create (){
+        return new PlanCategoriaEntity();
     }
 }

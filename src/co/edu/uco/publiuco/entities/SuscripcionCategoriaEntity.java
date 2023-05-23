@@ -9,12 +9,11 @@ public final class SuscripcionCategoriaEntity {
     private UUID identificador;
     private PerfilEntity perfil;
     private PlanCategoriaEntity planCategoria;
-    public static SuscripcionCategoriaEntity DEFAULT_OBJECT = new SuscripcionCategoriaEntity();
 
     private SuscripcionCategoriaEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setPerfil(PerfilEntity.getDefaultObject());
-        setPlanCategoria(PlanCategoriaEntity.getDefaultObject());
+        setPerfil(PerfilEntity.create());
+        setPlanCategoria(PlanCategoriaEntity.create());
     }
 
     public SuscripcionCategoriaEntity(UUID identificador, PerfilEntity perfil, PlanCategoriaEntity planCategoria) {
@@ -35,18 +34,21 @@ public final class SuscripcionCategoriaEntity {
         return planCategoria;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public SuscripcionCategoriaEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setPerfil(final PerfilEntity perfil) {
-        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.getDefaultObject());
+    public SuscripcionCategoriaEntity setPerfil(final PerfilEntity perfil) {
+        this.perfil = UtilObject.getDefault(perfil, PerfilEntity.create());
+        return this;
     }
 
-    private void setPlanCategoria(final PlanCategoriaEntity planCategoria) {
-        this.planCategoria = UtilObject.getDefault(planCategoria, PlanCategoriaEntity.getDefaultObject());
+    public SuscripcionCategoriaEntity setPlanCategoria(final PlanCategoriaEntity planCategoria) {
+        this.planCategoria = UtilObject.getDefault(planCategoria, PlanCategoriaEntity.create());
+        return this;
     }
-    public static SuscripcionCategoriaEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static SuscripcionCategoriaEntity create (){
+        return new SuscripcionCategoriaEntity();
     }
 }

@@ -11,13 +11,12 @@ public final class TipoAccesoEntity {
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
-    public static TipoAccesoEntity DEFAULT_OBJECT = new TipoAccesoEntity();
 
     private TipoAccesoEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
         setNombre(UtilText.getDefaultValue());
         setDescripcion(UtilText.getDefaultValue());
-        setEstado(EstadoEntity.getDefaultObject());
+        setEstado(EstadoEntity.create());
     }
     public TipoAccesoEntity(UUID identificador, String nombre, String descripcion, EstadoEntity estado) {
         setIdentificador(identificador);
@@ -42,23 +41,27 @@ public final class TipoAccesoEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public TipoAccesoEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setNombre(final String nombre) {
+    public TipoAccesoEntity setNombre(final String nombre) {
         this.nombre = UtilText.applyTrim(nombre);
+        return this;
     }
 
-    private void setDescripcion(final String descripcion) {
+    public TipoAccesoEntity setDescripcion(final String descripcion) {
         this.descripcion = UtilText.applyTrim(descripcion);
+        return this;
     }
 
-    private void setEstado(final EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public TipoAccesoEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static TipoAccesoEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static TipoAccesoEntity create (){
+        return new TipoAccesoEntity();
     }
 
 }

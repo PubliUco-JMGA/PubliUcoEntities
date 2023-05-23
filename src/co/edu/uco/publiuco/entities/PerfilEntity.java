@@ -10,14 +10,13 @@ public final class PerfilEntity {
     private LectorEntity lector;
     private RespuestaEntity deseaRecibirRecomendacionesDeCategoria;
     private RespuestaEntity deseaRecibirRecomendacionesDeAutor;
-    public static PerfilEntity DEFAULT_OBJECT = new PerfilEntity();
 
     private PerfilEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setLector(LectorEntity.getDefaultObject());
-        setDeseaRecibirRecomendacionesDeCategoria(RespuestaEntity.getDefaultObject());
-        setDeseaRecibirRecomendacionesDeAutor(RespuestaEntity.getDefaultObject());
+        setLector(LectorEntity.create());
+        setDeseaRecibirRecomendacionesDeCategoria(RespuestaEntity.create());
+        setDeseaRecibirRecomendacionesDeAutor(RespuestaEntity.create());
     }
 
     public PerfilEntity(UUID identificador, LectorEntity lector, RespuestaEntity deseaRecibirRecomendacionesDeCategoria, RespuestaEntity deseaRecibirRecomendacionesDeAutor) {
@@ -44,23 +43,26 @@ public final class PerfilEntity {
         return deseaRecibirRecomendacionesDeAutor;
     }
 
-    public PerfilEntity setIdentificador(UUID identificador) {
+    public PerfilEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
         return this;
     }
 
-    private void setLector(final LectorEntity lector) {
-        this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
+    public PerfilEntity setLector(final LectorEntity lector) {
+        this.lector = UtilObject.getDefault(lector, LectorEntity.create());
+        return this;
     }
 
-    private void setDeseaRecibirRecomendacionesDeCategoria(final RespuestaEntity deseaRecibirRecomendacionesDeCategoria) {
-        this.deseaRecibirRecomendacionesDeCategoria = UtilObject.getDefault(deseaRecibirRecomendacionesDeCategoria, RespuestaEntity.getDefaultObject());
+    public PerfilEntity setDeseaRecibirRecomendacionesDeCategoria(final RespuestaEntity deseaRecibirRecomendacionesDeCategoria) {
+        this.deseaRecibirRecomendacionesDeCategoria = UtilObject.getDefault(deseaRecibirRecomendacionesDeCategoria, RespuestaEntity.create());
+        return this;
     }
 
-    private void setDeseaRecibirRecomendacionesDeAutor(final RespuestaEntity deseaRecibirRecomendacionesDeAutor) {
-        this.deseaRecibirRecomendacionesDeAutor = UtilObject.getDefault(deseaRecibirRecomendacionesDeAutor, RespuestaEntity.getDefaultObject());
+    public PerfilEntity setDeseaRecibirRecomendacionesDeAutor(final RespuestaEntity deseaRecibirRecomendacionesDeAutor) {
+        this.deseaRecibirRecomendacionesDeAutor = UtilObject.getDefault(deseaRecibirRecomendacionesDeAutor, RespuestaEntity.create());
+        return this;
     }
-    public static PerfilEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static PerfilEntity create (){
+        return new PerfilEntity();
     }
 }

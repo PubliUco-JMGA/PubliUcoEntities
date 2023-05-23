@@ -9,12 +9,11 @@ public final class RevisorEntity {
     private UUID identificador;
     private PersonaEntity datosPersona;
     private EstadoEntity estado;
-    public static RevisorEntity DEFAULT_OBJECT = new RevisorEntity();
 
     private RevisorEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setDatosPersona(PersonaEntity.getDefaultObject());
-        setEstado(EstadoEntity.getDefaultObject());
+        setDatosPersona(PersonaEntity.create());
+        setEstado(EstadoEntity.create());
     }
     public RevisorEntity(UUID identificador, PersonaEntity datosPersona, EstadoEntity estado) {
         setIdentificador(identificador);
@@ -34,18 +33,21 @@ public final class RevisorEntity {
         return estado;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public RevisorEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setDatosPersona(final PersonaEntity datosPersona) {
-        this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.getDefaultObject());
+    public RevisorEntity setDatosPersona(final PersonaEntity datosPersona) {
+        this.datosPersona = UtilObject.getDefault(datosPersona, PersonaEntity.create());
+        return this;
     }
 
-    private void setEstado(final EstadoEntity estado) {
-        this.estado = UtilObject.getDefault(estado, EstadoEntity.getDefaultObject());
+    public RevisorEntity setEstado(final EstadoEntity estado) {
+        this.estado = UtilObject.getDefault(estado, EstadoEntity.create());
+        return this;
     }
-    public static RevisorEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static RevisorEntity create (){
+        return new RevisorEntity();
     }
 }

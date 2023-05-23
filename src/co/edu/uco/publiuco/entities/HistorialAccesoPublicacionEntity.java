@@ -12,13 +12,12 @@ public final class HistorialAccesoPublicacionEntity {
     private LectorEntity lector;
     private PublicacionEntity publicacion;
     private LocalDateTime fechaAcceso;
-    public static HistorialAccesoPublicacionEntity DEFAULT_OBJECT = new HistorialAccesoPublicacionEntity();
 
     private HistorialAccesoPublicacionEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setLector(LectorEntity.getDefaultObject());
-        setPublicacion(PublicacionEntity.getDefaultObject());
+        setLector(LectorEntity.create());
+        setPublicacion(PublicacionEntity.create());
         setFechaAcceso(UtilDate.getDefaultValue());
     }
 
@@ -46,22 +45,26 @@ public final class HistorialAccesoPublicacionEntity {
         return fechaAcceso;
     }
 
-    private void setIdentificador(final UUID identificador) {
+    public HistorialAccesoPublicacionEntity setIdentificador(final UUID identificador) {
         this.identificador = UtilUUID.getDefault(identificador);
+        return this;
     }
 
-    private void setLector(final LectorEntity lector) {
-        this.lector = UtilObject.getDefault(lector, LectorEntity.getDefaultObject());
+    public HistorialAccesoPublicacionEntity setLector(final LectorEntity lector) {
+        this.lector = UtilObject.getDefault(lector, LectorEntity.create());
+        return this;
     }
 
-    private void setPublicacion(final PublicacionEntity publicacion) {
-        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.getDefaultObject());
+    public HistorialAccesoPublicacionEntity setPublicacion(final PublicacionEntity publicacion) {
+        this.publicacion = UtilObject.getDefault(publicacion, PublicacionEntity.create());
+        return this;
     }
 
-    private void setFechaAcceso(final LocalDateTime fechaAcceso) {
+    public HistorialAccesoPublicacionEntity setFechaAcceso(final LocalDateTime fechaAcceso) {
         this.fechaAcceso = UtilDate.getDefault(fechaAcceso);
+        return this;
     }
-    public static HistorialAccesoPublicacionEntity getDefaultObject (){
-        return DEFAULT_OBJECT;
+    public static HistorialAccesoPublicacionEntity create (){
+        return new HistorialAccesoPublicacionEntity();
     }
 }

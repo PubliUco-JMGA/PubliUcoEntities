@@ -12,6 +12,7 @@ public final class EstadoEntity {
 
     private UUID identificador;
     private String nombre;
+    private String descripcion;
     private TipoEstadoEntity tipo;
 
 
@@ -20,14 +21,16 @@ public final class EstadoEntity {
         setIdentificador(UtilUUID.getDefaultValue());
         setNombre(UtilText.getDefaultValue());
         setTipo(TipoEstadoEntity.create());
+        setDescripcion(UtilText.getDefaultValue());
     }
 
 
-    public EstadoEntity(UUID identificador, String nombre, TipoEstadoEntity tipo) {
+    public EstadoEntity(UUID identificador, String nombre, TipoEstadoEntity tipo, String descripcion) {
         super();
         setIdentificador(identificador);
         setNombre(nombre);
         setTipo(tipo);
+        setDescripcion(descripcion);
     }
 
     public final EstadoEntity setIdentificador(final UUID identificador) {
@@ -61,4 +64,15 @@ public final class EstadoEntity {
     public static EstadoEntity create(){
         return new EstadoEntity();
     }
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public EstadoEntity setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+		return this;
+	}
 }

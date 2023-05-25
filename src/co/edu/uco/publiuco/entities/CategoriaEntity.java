@@ -14,11 +14,13 @@ public final class CategoriaEntity {
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
+    private static final CategoriaEntity PADRE = new CategoriaEntity(UtilUUID.generateNewUUID(), null, "Padre", UtilText.getDefaultValue(), EstadoEntity.create(), UtilBoolean.getDefaultValue());
+
 
     private CategoriaEntity() {
         super();
         setIdentificador(UtilUUID.getDefaultValue());
-        setCategoriaPadre(CategoriaEntity.create());
+        setCategoriaPadre(PADRE);
         setNombre(UtilText.getDefaultValue());
         setDescripcion(UtilText.getDefaultValue());
         setEstado(EstadoEntity.create());

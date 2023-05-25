@@ -18,6 +18,7 @@ public final class ComentarioLectorEntity {
 	private String contenido;
 	private LocalDateTime fechaComentario;
 	private EstadoEntity estado;
+	private static final ComentarioLectorEntity PADRE = new ComentarioLectorEntity(UtilUUID.generateNewUUID(),LectorEntity.create(),PublicacionEntity.create(),null,UtilText.getDefaultValue(),UtilDate.getDefaultValue(),EstadoEntity.create(),UtilBoolean.getDefaultValue());
 
 
 	private ComentarioLectorEntity() {
@@ -25,7 +26,7 @@ public final class ComentarioLectorEntity {
 		setIdentificador(UtilUUID.getDefaultValue());
 		setLector(LectorEntity.create());
 		setPublicacion(PublicacionEntity.create());
-		setComentarioPadre(create());
+		setComentarioPadre(PADRE);
 		setContenido(UtilText.getDefaultValue());
 		setFechaComentario(UtilDate.getDefaultValue());
 		setEstado(EstadoEntity.create() );

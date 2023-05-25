@@ -16,13 +16,14 @@ public final class VersionEntity {
     private String resumen;
     private String cuerpo;
     private EstadoEntity estado;
+    private static final VersionEntity VERSION_POR_DEFECTO = new VersionEntity(UtilUUID.getDefaultValue(),null,UtilNumber.getIntegerDefaultValue(),UtilDate.getDefaultValue(),UtilDate.getDefaultValue(),UtilText.getDefaultValue(),UtilText.getDefaultValue(),UtilText.getDefaultValue(),EstadoEntity.create(),UtilBoolean.getDefaultValue()); 
 
     public static final VersionEntity DEFAULT_OBJECT = new VersionEntity();
 
 
     private VersionEntity() {
         setIdentificador(UtilUUID.getDefaultValue());
-        setVersionAnterior(create());
+        setVersionAnterior(VERSION_POR_DEFECTO);
         setNumeroVersion(UtilNumber.getIntegerDefaultValue());
         setFechaCreacion(UtilDate.getDefaultValue());
         setFechaUltimaModificacion(UtilDate.getDefaultValue());

@@ -16,8 +16,9 @@ public final class VersionEntity {
     private String resumen;
     private String cuerpo;
     private EstadoEntity estado;
-    private static final VersionEntity VERSION_POR_DEFECTO = new VersionEntity(UtilUUID.getDefaultValue(),null,UtilNumber.getIntegerDefaultValue(),UtilDate.getDefaultValue(),UtilDate.getDefaultValue(),UtilText.getDefaultValue(),UtilText.getDefaultValue(),UtilText.getDefaultValue(),EstadoEntity.create(),UtilBoolean.getDefaultValue()); 
+    private static final String UUID_VERSION_POR_DEFECTO = "";
 
+    private static final VersionEntity VERSION_POR_DEFECTO = new VersionEntity(UtilUUID.generateUUIDFromString(UUID_VERSION_POR_DEFECTO),null,UtilNumber.getIntegerDefaultValue(),UtilDate.getDefaultValue(),UtilDate.getDefaultValue(),UtilText.getDefaultValue(),UtilText.getDefaultValue(),UtilText.getDefaultValue(),EstadoEntity.create(),UtilBoolean.getDefaultValue()); 
     public static final VersionEntity DEFAULT_OBJECT = new VersionEntity();
 
 
@@ -48,7 +49,7 @@ public final class VersionEntity {
     }
 
     
-    public boolean tieneVersionAnterior() {
+    public boolean isTieneVersionAnterior() {
 		return tieneVersionAnterior;
 	}
 
@@ -100,10 +101,10 @@ public final class VersionEntity {
 
 
     public VersionEntity setVersionAnterior(final VersionEntity versionAnterior) {
-    	if(tieneVersionAnterior()) {
+    	if(isTieneVersionAnterior()) {
             this.versionAnterior = UtilObject.getDefault(versionAnterior, VersionEntity.create());
         }else {
-			this.versionAnterior = (VersionEntity) UtilObject.getNullValue();
+			this.versionAnterior = VERSION_POR_DEFECTO;
         }
     	return this;
     }

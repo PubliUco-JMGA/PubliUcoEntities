@@ -14,7 +14,8 @@ public final class CategoriaEntity {
     private String nombre;
     private String descripcion;
     private EstadoEntity estado;
-    private static final CategoriaEntity PADRE = new CategoriaEntity(UtilUUID.generateNewUUID(), null, "Padre", UtilText.getDefaultValue(), EstadoEntity.create(), UtilBoolean.getDefaultValue());
+    private static final String UUID_CATEGORIA_RAIZ = ""; 
+    private static final CategoriaEntity PADRE = new CategoriaEntity(UtilUUID.generateUUIDFromString(UUID_CATEGORIA_RAIZ), null, "Padre", UtilText.getDefaultValue(), EstadoEntity.create(), UtilBoolean.getDefaultValue());
 
 
     private CategoriaEntity() {
@@ -38,7 +39,7 @@ public final class CategoriaEntity {
     }
 
 
-    public boolean tienePadre() {
+    public boolean isTienePadre() {
 		return tienePadre;
 	}
 
@@ -69,10 +70,10 @@ public final class CategoriaEntity {
     }
 
     public CategoriaEntity setCategoriaPadre(final CategoriaEntity categoriaPadre) {
-        if(tienePadre()) {
+        if(isTienePadre()) {
             this.categoriaPadre = UtilObject.getDefault(categoriaPadre, CategoriaEntity.create());
         }else {
-			this.categoriaPadre = (CategoriaEntity) UtilObject.getNullValue();
+			this.categoriaPadre = PADRE;
         }
     	return this;
     }

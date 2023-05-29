@@ -18,7 +18,8 @@ public final class ComentarioLectorEntity {
 	private String contenido;
 	private LocalDateTime fechaComentario;
 	private EstadoEntity estado;
-	private static final ComentarioLectorEntity PADRE = new ComentarioLectorEntity(UtilUUID.generateNewUUID(),LectorEntity.create(),PublicacionEntity.create(),null,UtilText.getDefaultValue(),UtilDate.getDefaultValue(),EstadoEntity.create(),UtilBoolean.getDefaultValue());
+	private static final String UUID_COMENTARIO_RAIZ = "e1197bb4-2978-49f8-baaa-fd69d694dffa";
+	private static final ComentarioLectorEntity PADRE = new ComentarioLectorEntity(UtilUUID.generateUUIDFromString(UUID_COMENTARIO_RAIZ),LectorEntity.create(),PublicacionEntity.create(),null,UtilText.getDefaultValue(),UtilDate.getDefaultValue(),EstadoEntity.create(),UtilBoolean.getDefaultValue());
 
 
 	private ComentarioLectorEntity() {
@@ -48,7 +49,7 @@ public final class ComentarioLectorEntity {
 
 
 
-	public boolean tienePadre() {
+	public boolean isTienePadre() {
 		return tienePadre;
 	}
 
@@ -98,10 +99,10 @@ public final class ComentarioLectorEntity {
 	}
 
 	public ComentarioLectorEntity setComentarioPadre(final ComentarioLectorEntity comentarioPadre) {
-		if(tienePadre()) {
+		if(isTienePadre()) {
 			this.comentarioPadre = UtilObject.getDefault(comentarioPadre, ComentarioLectorEntity.create());
 		}else {
-			this.comentarioPadre = (ComentarioLectorEntity) UtilObject.getNullValue();
+			this.comentarioPadre = PADRE;
 		}
 		return this;
 	}
